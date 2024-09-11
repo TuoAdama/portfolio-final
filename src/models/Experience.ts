@@ -1,6 +1,9 @@
 interface Experience {
   name: String;
-  imageUrl: String;
+  company: string;
+  city: String;
+  country: string;
+  iconUrl: String;
   beginAt: String;
   endAt: String;
 }

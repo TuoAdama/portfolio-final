@@ -1,27 +1,15 @@
 <div>
   <app-nav-bar></app-nav-bar>
-  <div>
-    <div class="row rounded-3 mt-5">
-      <div class="col-sm-12 col-md-6 col-lg-6  d-flex flex-column justify-content-center p-3">
-        <div class="fs-1">Hello!,</div>
-        <div class="fs-1">Je suis Tuo Adama</div>
-      </div>
-      <div class="col-sm-12 col-md-6 col-lg-6 py-5 d-flex flex-column justify-content-center">
-        <div class="fs-1">Développeur Full-Stack depuis deux maintenant.</div>
-        <p class="my-3">Passionné par les nouvelles technologies</p>
-        <p>
-          <button class="btn btn-dark p-2">Explorez mon cv</button>
-          <button class="btn btn-outline-dark ms-2 p-2">Contactez-moi</button>
-        </p>
-      </div>
+  <app-presentation/>
+  <div class="row bg-light my-3">
+    <div class="col-sm-12 col-md-6 col-lg-6 p-3">
+      <app-experience-section name="Expériences Professionelles"/>
     </div>
-    <div class="row bg-light my-3">
-      <div class="col-sm-12 col-md-6 col-lg-6 p-3">
-        <app-experience-section name="Expériences Professionelles"/>
-      </div>
-      <div class="col-sm-12 col-md-6 col-lg-6 p-3">
-        <app-experience-section name="Formations"/>
-      </div>
+    <div class="col-sm-12 col-md-6 col-lg-6 p-3">
+      <app-experience-section name="Formations"/>
     </div>
+  </div>
+  <div class="row">
+    <app-contact/>
   </div>
 </div>

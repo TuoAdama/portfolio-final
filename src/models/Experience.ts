@@ -1,9 +1,5 @@
-interface Experience {
-  name: String;
+import {BaseExperience} from "./BaseExperience";
+
+interface Experience extends BaseExperience {
   company: string;
-  city: String;
-  country: string;
-  iconUrl: String;
-  beginAt: String;
-  endAt: String;
 }

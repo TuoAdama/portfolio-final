@@ -1,19 +1,33 @@
 <div>
   <app-nav-bar></app-nav-bar>
   <div>
-    <div class="row">
-      <div class="col-6 border d-flex flex-column justify-content-center p-3">
-        <h1>Hello!,</h1>
-        <h1>Je suis Tuo Adama</h1>
+    <div class="row border mt-5">
+      <div class="col-sm-12 col-md-6 col-lg-6  d-flex flex-column justify-content-center p-3">
+        <div class="fs-1">Hello!,</div>
+        <div class="fs-1">Je suis Tuo Adama</div>
       </div>
-      <div class="col-6 p-3">
-        <h4>Développeur Full-Stack Java/Angular,</h4>
-        <h4>depuis deux maintenant</h4>
+      <div class="col-sm-12 col-md-6 col-lg-6 py-5 d-flex flex-column justify-content-center">
+        <div class="fs-1">Développeur Full-Stack depuis deux maintenant.</div>
         <p class="my-3">Passionné par les nouvelles technologies</p>
         <p>
           <button class="btn btn-dark p-2">Explorez mon cv</button>
           <button class="btn btn-outline-dark ms-2 p-2">Contactez-moi</button>
         </p>
+      </div>
+    </div>
+    <div class="row border border-primary bg-light mt-5">
+      <div class="col-sm-12 col-md-6 col-lg-6 p-3">
+        <div class="fs-3 fw-bold">Expériences Professionelles</div>
+
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-6 p-3">
+      <div class="fs-3 fw-bold mb-3">Formations</div>
+        <app-experience-item />
+        <hr>
+        <app-experience-item />
+        <hr>
+        <app-experience-item />
+
       </div>
     </div>
   </div>

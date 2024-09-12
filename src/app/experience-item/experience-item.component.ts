@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {BaseExperience} from "../../models/BaseExperience";
 
 @Component({
   selector: 'app-experience-item',
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrl: './experience-item.component.css'
 })
 export class ExperienceItemComponent {
-
+  @Input({required:true}) item: BaseExperience|undefined;
 }

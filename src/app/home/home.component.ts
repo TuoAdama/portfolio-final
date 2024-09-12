@@ -49,7 +49,7 @@ export class HomeComponent {
     },
     {
       name: "Architecte et testeur logiciels",
-      city: "Nantes",
+      city: "Abidjan",
       country: this.IVORY_COAST,
       company:"Kip Services & Technologies · Stage",
       beginAt: "Sept. 2023",
@@ -75,7 +75,7 @@ export class HomeComponent {
       endAt:"Août 2021",
     },
     {
-      name: "Architecte et testeur logiciels",
+      name: "Licence informatique",
       city: "Nantes",
       country: this.IVORY_COAST,
       schoolName:this.UNIV_NANGUI,

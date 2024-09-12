@@ -1,8 +1,9 @@
 <div>
   <div class="fs-4 fw-bold mb-3">{{ name }}</div>
-  <app-experience-item />
-  <hr>
-  <app-experience-item />
-  <hr>
-  <app-experience-item />
+    @for (item of items; track item.name){
+        <app-experience-item [item]="item"/>
+        @if (!$last){
+            <hr>
+        }
+    }
 </div>

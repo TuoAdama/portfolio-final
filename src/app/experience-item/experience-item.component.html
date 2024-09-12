@@ -3,7 +3,7 @@
     <img class="rounded-2" src="https://placehold.co/100x100" height="50" width="50">
   </div>
   <div class="ms-2 d-flex align-content-around flex-column justify-content-center w-100 p-2">
-    <div>Master MIAGE Parcours DLIS</div>
-    <div class="text-muted">Sept. 2022 - Aôut 2024</div>
+    <div>{{item?.name+ " | "}} <span class="fw-bold">{{item?.city+"-"+item?.country}}</span></div>
+    <div class="text-muted">{{ item?.beginAt+" - "+ item?.endAt }}</div>
   </div>
 </div>

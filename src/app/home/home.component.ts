@@ -8,6 +8,7 @@ import {ContactComponent} from "../contact/contact.component";
 import {Experience} from "../../models/Experience";
 import {FormGroup} from "@angular/forms";
 import {Formation} from "../../models/Formation";
+import {FooterComponent} from "../footer/footer.component";
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,8 @@ import {Formation} from "../../models/Formation";
     ExperienceItemComponent,
     ExperienceSectionComponent,
     PresentationComponent,
-    ContactComponent
+    ContactComponent,
+    FooterComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

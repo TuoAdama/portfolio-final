@@ -83,4 +83,5 @@ export class HomeComponent {
       endAt:"Août 2019",
     }
   ]
+  protected readonly Date = Date;
 }

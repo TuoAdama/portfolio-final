@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {BaseExperience} from "../../models/BaseExperience";
 
 @Component({
@@ -8,6 +8,17 @@ import {BaseExperience} from "../../models/BaseExperience";
   templateUrl: './experience-item.component.html',
   styleUrl: './experience-item.component.css'
 })
-export class ExperienceItemComponent {
+export class ExperienceItemComponent implements OnInit {
   @Input({required:true}) item: BaseExperience|undefined;
+  structureName: string = "";
+  ngOnInit() {
+    this.structureName = this.getName(this.item);
+  }
+
+  getName(data: any){
+    if("company" in data){
+      return data.company;
+    }
+    return data.schoolName;
+  }
 }

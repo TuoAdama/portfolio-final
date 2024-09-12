@@ -1,5 +1,5 @@
 import {BaseExperience} from "./BaseExperience";
 
-interface Experience extends BaseExperience {
+export interface Experience extends BaseExperience {
   company: string;
 }

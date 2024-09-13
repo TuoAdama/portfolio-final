@@ -58,6 +58,7 @@ export class HomeComponent {
       company:"Kip Services & Technologies",
       beginAt: "Sept. 2023",
       endAt:"Août 2024",
+      iconUrl: "https://media.licdn.com/dms/image/v2/C4E0BAQF2N1S2LYm81Q/company-logo_200_200/company-logo_200_200/0/1677783941943?e=1734566400&v=beta&t=FrdEYLhhsPzk8VUAB64xTLz9INiJFe9EGk-9bR9HYXM",
     }
   ];
 

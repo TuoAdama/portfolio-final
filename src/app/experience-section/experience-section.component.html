@@ -1,9 +1,10 @@
 <div>
   <div class="fs-4 fw-bold mb-3">{{ name }}</div>
+  <div class="row">
     @for (item of items; track item.name){
+      <div class="col-12">
         <app-experience-item [item]="item"/>
-        @if (!$last){
-            <hr>
-        }
+      </div>
     }
+  </div>
 </div>

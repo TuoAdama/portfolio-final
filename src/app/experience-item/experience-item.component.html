@@ -1,15 +1,32 @@
-<div class="d-flex align-items-center w-100">
-  <div>
-    <img class="rounded-2" src="{{item?.iconUrl ?? 'https://placehold.co/100x100'}}" height="50" width="50">
-  </div>
-  <div class="ms-2 d-flex align-content-around flex-column justify-content-center w-100 p-2">
+<!--<div class="d-flex align-items-center w-100">-->
+<!--  <div>-->
+<!--    <img class="rounded-2" src="{{item?.iconUrl ?? 'https://placehold.co/100x100'}}" height="50" width="50">-->
+<!--  </div>-->
+<!--  <div class="ms-2 d-flex align-content-around flex-column justify-content-center w-100 p-2">-->
+<!--    <div class="fw-bold">{{item?.name}}</div>-->
+<!--    <div>-->
+<!--        <span>{{structureName}}</span>-->
+<!--    </div>-->
+<!--    <div class="text-muted">-->
+<!--        {{item?.city+", "+item?.country}}-->
+<!--    </div>-->
+<!--    <div class="text-muted">{{ item?.beginAt+" - "+ item?.endAt }}</div>-->
+<!--  </div>-->
+<!--</div>-->
+<div class="d-flex m-2 row">
+  <div class="card shadow p-3">
+    <div class="d-xs-block d-lg-flex justify-content-between">
+      <div class="d-flex mb-3">
+        <div>
+          <img class="rounded-2" src="{{item?.iconUrl ?? 'https://placehold.co/100x100'}}" height="50" width="50">
+        </div>
+        <div class="ms-3">
+          <div>{{structureName}}</div>
+          <div class="text-muted">{{item?.city+", "+item?.country}}</div>
+        </div>
+      </div>
+      <div class="text-muted">{{ item?.beginAt+" - "+ item?.endAt }}</div>
+    </div>
     <div class="fw-bold">{{item?.name}}</div>
-    <div>
-        <span>{{structureName}}</span>
-    </div>
-    <div class="text-muted">
-        {{item?.city+", "+item?.country}}
-    </div>
-    <div class="text-muted">{{ item?.beginAt+" - "+ item?.endAt }}</div>
   </div>
 </div>

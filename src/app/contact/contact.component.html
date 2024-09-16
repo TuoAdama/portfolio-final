@@ -23,6 +23,12 @@
           <button [disabled]="!form.valid" class="btn btn-dark mt-3">Envoyer</button>
         </div>
       </form>
+      @if(showCommentSendMessage){
+        <div class="alert alert-success mt-3 d-flex justify-content-between align-items-center">
+          <div>Votre message a bien été envoyé !</div>
+          <button class="btn" (click)="showCommentSendMessage = false">X</button>
+        </div>
+      }
     </div>
   </div>
 </div>

@@ -16,6 +16,7 @@ import {ContactService} from "../services/contact.service";
 export class ContactComponent {
 
   contactService: ContactService = inject(ContactService);
+  showCommentSendMessage: boolean = false;
 
    form: FormGroup = new FormGroup({
      email: new FormControl("", [Validators.required, Validators.email]),
@@ -28,7 +29,8 @@ export class ContactComponent {
       this.contactService.postContact(this.form.value as Contact)
         .pipe()
         .subscribe((value: any) => {
-          console.log(value)
+          this.form.reset();
+          this.showCommentSendMessage = true
         }, error => {
           alert(error.toString())
         })

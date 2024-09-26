@@ -1,5 +1,5 @@
 export interface Contact {
-  title: string;
+  subject: string;
   email: string;
-  message: string;
+  body: string;
 }

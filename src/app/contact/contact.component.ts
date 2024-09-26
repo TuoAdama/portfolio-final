@@ -16,16 +16,24 @@ import {ContactService} from "../services/contact.service";
 export class ContactComponent {
 
   contactService: ContactService = inject(ContactService);
+  showCommentSendMessage: boolean = false;
 
    form: FormGroup = new FormGroup({
      email: new FormControl("", [Validators.required, Validators.email]),
-     title: new FormControl("", [Validators.required, Validators.minLength(3)]),
-     message: new FormControl("", [Validators.required, Validators.minLength(3)]),
+     subject: new FormControl("", [Validators.required, Validators.minLength(3)]),
+     body: new FormControl("", [Validators.required, Validators.minLength(3)]),
    })
 
   onSubmit(){
     if (this.form.valid) {
       this.contactService.postContact(this.form.value as Contact)
+        .pipe()
+        .subscribe((value: any) => {
+          this.form.reset();
+          this.showCommentSendMessage = true
+        }, error => {
+          alert(error.toString())
+        })
     }
   }
 }

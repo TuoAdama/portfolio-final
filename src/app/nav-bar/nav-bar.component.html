@@ -1,31 +1,21 @@
-<nav class="navbar navbar-expand-sm">
-  <a [routerLink]="['/']" class="navbar-brand">
-    <img src="favicon.png" height="45" width="45"/>
-  </a>
-  <button class="navbar-toggler mr-auto"
-          type="button"
-          data-toggle="collapse"
-          data-target="#nav-content"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="nav-content">
-    <ul class="navbar-nav my-2 align-items-center">
-      <li class="nav-item">
-        <a [routerLink]="['/']" class="nav-link text-dark">Accueil</a>
-      </li>
-      <li class="nav-item mx-lg-4">
-        <a href="#experiences" class="nav-link text-dark">Expériences</a>
-      </li>
-      <li class="nav-item">
-        <a href="#experiences" class="nav-link text-dark">Formations</a>
-      </li>
-<!--      <li class="nav-item">-->
-<!--        <a href="#contact-me" class="nav-link text-dark">Contactez-moi</a>-->
-<!--      </li>-->
-    </ul>
-  </div>
-</nav>
+<div class="sticky ring-1 ring-black p-2 flex justify-center">
+  <nav class="w-full md:w-8/12 flex items-center justify-items-center">
+    <div>
+      <a href="#" class="text-lg font-semibold text-slate-700">LOGO</a>
+    </div>
+    <div class="md:hidden ml-auto">
+      <a href="#navTab"><i class="hover:text-blue-300 text-lg fa-solid fa-ellipsis-vertical"></i></a>
+    </div>
+    <div id="navTab" class="text-black-700 fixed z-30 hidden target:block shadow-2xl right-0 border bg-white ring-2 h-screen w-cr">
+      <div>
+        COUCOUE
+      </div>
+      <a href="#">X</a>
+    </div>
+    <div class="hidden md:block ml-auto space-x-6">
+      <a href="#" class="hover:text-blue-300 text-lg font-semibold text-slate-700">Projets</a>
+      <a href="#" class="hover:text-blue-300 text-lg font-semibold text-slate-700">Compétences</a>
+      <a href="#" class="hover:text-blue-400 text-lg font-semibold text-slate-700">Parcours</a>
+    </div>
+  </nav>
+</div>

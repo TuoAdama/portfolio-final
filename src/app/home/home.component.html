@@ -1,9 +1,26 @@
 <app-presentation/>
 
-<div>
-  <p class="text-center text-2xl md:text-4xl my-5">Mes expériences</p>
+<p class="text-center text-2xl md:text-4xl my-5">Mes expériences</p>
+<div class="mx-auto w-8/12">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    @for(experience of experiences; track experience){
+      <div class="flex rounded p-7 border">
+        <div>
+          <img [src]="experience.iconUrl" height="80px" width="80px" alt="">
+        </div>
+        <div class="ms-3">
+          <div class="font-semibold">{{ experience.company }}</div>
+          <div class="text-sm mt-2">{{experience.beginAt+"-"+experience.endAt}}</div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
 
-  <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+<p class="text-center text-2xl md:text-4xl my-5">Formations</p>
+<div class="mx-auto w-8/12">
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     @for(experience of experiences; track experience){
       <div class="flex rounded p-7 border">
         <div>

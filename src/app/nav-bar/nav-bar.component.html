@@ -1,15 +1,15 @@
 <div class="w-full border  p-2 flex justify-center shadow shadow-amber-50">
-  <nav class=" w-full md:w-8/12 flex items-center justify-items-center">
+  <nav class=" w-full flex items-center justify-items-center">
     <div>
-      <a href="#" class="text-lg font-semibold text-slate-700">LOGO</a>
+      <a [routerLink]="['/']" class="rounded text-md font-semibold ms-3 bg-black p-2 text-white">ATUO</a>
     </div>
-    <div class="md:hidden ml-auto">
-      <a href="#"><i class="hover:text-blue-300 text-lg fa-solid fa-ellipsis-vertical"></i></a>
-    </div>
-    <div class="hidden md:block ml-auto space-x-6">
+    <div class="ml-auto flex items-center space-x-6 pe-3">
       <a href="#" class="hover:text-blue-300 text-lg font-semibold text-slate-700">Projets</a>
       <a href="#" class="hover:text-blue-300 text-lg font-semibold text-slate-700">Compétences</a>
       <a href="#" class="hover:text-blue-400 text-lg font-semibold text-slate-700">Parcours</a>
+      <a [href]="networks.linkedin" target="_blank"><img class="h-[24px] w-[24px]" src="assets/images/icons/linkedIn.png" alt="linkedin"></a>
+      <a [href]="networks.twitter" target="_blank"><img src="assets/images/icons/twitter.png" alt="twitter"></a>
+      <a [href]="networks.github" target="_blank"><img class="h-[24px] w-[24px]" src="assets/images/icons/github.png" alt="github"></a>
     </div>
   </nav>
 </div>

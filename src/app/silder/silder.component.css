@@ -1,1 +1,30 @@
+.slide-item {
+  transition: left linear;
+}
 
+.slide-in {
+  animation: 2s slideIn;
+}
+
+.slide-out {
+  animation: 2s slideOut;
+}
+
+
+@keyframes slideIn {
+  from {
+    left: 100%;
+  }
+  to {
+    left: 0;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    left: 0;
+  }
+  to {
+    left: -100%;
+  }
+}

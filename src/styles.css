@@ -1,0 +1,30 @@
+.slideIn {
+  animation-name: slideOut ;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-delay: 1s;
+}
+.slideOut {
+  animation-name: slideOut ;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-direction: f;
+}
+
+@keyframes slideIn {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 0;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    left: 0;
+  }
+  to {
+    left: -100%;
+  }
+}

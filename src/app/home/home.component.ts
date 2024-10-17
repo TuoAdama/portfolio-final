@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 import {NavBarComponent} from "../nav-bar/nav-bar.component";
 import {ExperienceItemComponent} from "../experience-item/experience-item.component";
@@ -9,6 +9,7 @@ import {Experience} from "../../models/Experience";
 import {FormGroup} from "@angular/forms";
 import {Formation} from "../../models/Formation";
 import {FooterComponent} from "../footer/footer.component";
+import {SilderComponent} from "../silder/silder.component";
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,8 @@ import {FooterComponent} from "../footer/footer.component";
     ExperienceSectionComponent,
     PresentationComponent,
     ContactComponent,
-    FooterComponent
+    FooterComponent,
+    SilderComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
@@ -92,4 +94,5 @@ export class HomeComponent {
     }
   ]
   protected readonly Date = Date;
+
 }

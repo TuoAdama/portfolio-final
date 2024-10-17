@@ -1,31 +1,15 @@
-<nav class="navbar navbar-expand-sm">
-  <a [routerLink]="['/']" class="navbar-brand">
-    <img src="favicon.png" height="45" width="45"/>
-  </a>
-  <button class="navbar-toggler mr-auto"
-          type="button"
-          data-toggle="collapse"
-          data-target="#nav-content"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="nav-content">
-    <ul class="navbar-nav my-2 align-items-center">
-      <li class="nav-item">
-        <a [routerLink]="['/']" class="nav-link text-dark">Accueil</a>
-      </li>
-      <li class="nav-item mx-lg-4">
-        <a href="#experiences" class="nav-link text-dark">Expériences</a>
-      </li>
-      <li class="nav-item">
-        <a href="#experiences" class="nav-link text-dark">Formations</a>
-      </li>
-<!--      <li class="nav-item">-->
-<!--        <a href="#contact-me" class="nav-link text-dark">Contactez-moi</a>-->
-<!--      </li>-->
-    </ul>
-  </div>
-</nav>
+<div class="w-full border  p-2 flex justify-center shadow shadow-amber-50">
+  <nav class=" w-full flex items-center justify-items-center">
+    <div>
+      <a [routerLink]="['/']" class="rounded text-md font-semibold ms-3 bg-black p-2 text-white">ATUO</a>
+    </div>
+    <div class="ml-auto flex items-center space-x-6 pe-3">
+      <a href="#" class="hover:text-blue-300 text-lg font-semibold text-slate-700">Projets</a>
+      <a href="#" class="hover:text-blue-300 text-lg font-semibold text-slate-700">Compétences</a>
+      <a href="#" class="hover:text-blue-400 text-lg font-semibold text-slate-700">Parcours</a>
+      <a [href]="networks.linkedin" target="_blank"><img class="h-[24px] w-[24px]" src="assets/images/icons/linkedIn.png" alt="linkedin"></a>
+      <a [href]="networks.twitter" target="_blank"><img src="assets/images/icons/twitter.png" alt="twitter"></a>
+      <a [href]="networks.github" target="_blank"><img class="h-[24px] w-[24px]" src="assets/images/icons/github.png" alt="github"></a>
+    </div>
+  </nav>
+</div>

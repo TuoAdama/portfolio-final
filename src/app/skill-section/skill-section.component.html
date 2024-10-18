@@ -1,0 +1,10 @@
+<div class="flex justify-center flex-col items-center">
+    <div class="text-3xl font-bold my-9">
+        Compétences
+    </div>
+    <div class="grid grid-cols-3 gap-8">
+        @for (skill of skills; track $index) {
+            <app-skill-item [skill]="skill"></app-skill-item>
+        }
+    </div>
+</div>

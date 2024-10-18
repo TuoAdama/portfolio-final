@@ -10,6 +10,7 @@ import {FormGroup} from "@angular/forms";
 import {Formation} from "../../models/Formation";
 import {FooterComponent} from "../footer/footer.component";
 import {SilderComponent} from "../silder/silder.component";
+import { SkillSectionComponent } from "../skill-section/skill-section.component";
 
 @Component({
   selector: 'app-home',
@@ -22,8 +23,9 @@ import {SilderComponent} from "../silder/silder.component";
     PresentationComponent,
     ContactComponent,
     FooterComponent,
-    SilderComponent
-  ],
+    SilderComponent,
+    SkillSectionComponent
+],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

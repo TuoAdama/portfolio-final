@@ -42,8 +42,8 @@ export class HomeComponent {
       city: "Nantes",
       country: this.FRANCE,
       company:"Orange Business Services",
-      beginAt: "Mai 2023",
-      endAt:"Août 2024",
+      beginAt: "2023",
+      endAt:"2024",
       iconUrl: "https://reseaux.orange-business.com/wp-content/uploads/2022/03/favicon.png",
     },
     {
@@ -52,7 +52,7 @@ export class HomeComponent {
       country: this.IVORY_COAST,
       company:"OneMart Distributors",
       beginAt: "Juin 2021",
-      endAt:"Sept 2022",
+      endAt:"2022",
       iconUrl: "https://media.licdn.com/dms/image/v2/C4D0BAQFggP8cthzMsg/company-logo_200_200/company-logo_200_200/0/1672473629862/onemart_distributors_logo?e=1734566400&v=beta&t=v6TEQrupuoPgCehgzZLatFhS-vWvyoxpQNvgZsB1QfM"
     },
     {
@@ -60,8 +60,8 @@ export class HomeComponent {
       city: "Abidjan",
       country: this.IVORY_COAST,
       company:"Kip Services & Technologies",
-      beginAt: "Sept. 2023",
-      endAt:"Août 2024",
+      beginAt: "2023",
+      endAt:"2024",
       iconUrl: "https://media.licdn.com/dms/image/v2/C4E0BAQF2N1S2LYm81Q/company-logo_200_200/company-logo_200_200/0/1677783941943?e=1734566400&v=beta&t=FrdEYLhhsPzk8VUAB64xTLz9INiJFe9EGk-9bR9HYXM",
     }
   ];
@@ -72,8 +72,8 @@ export class HomeComponent {
       city: "Rennes",
       country: this.FRANCE,
       schoolName:this.UNIV_RENNES,
-      beginAt: "Sept. 2022",
-      endAt:"Août 2024",
+      beginAt: "2022",
+      endAt:"2024",
       iconUrl: "https://upload.wikimedia.org/wikipedia/fr/thumb/6/6c/Logo_Universit%C3%A9_Rennes_1_.svg/1200px-Logo_Universit%C3%A9_Rennes_1_.svg.png"
     },
     {
@@ -81,8 +81,8 @@ export class HomeComponent {
       city: "Abidjan",
       country: this.IVORY_COAST,
       schoolName: this.UNIV_NANGUI,
-      beginAt: "Sept. 2019",
-      endAt:"Août 2021",
+      beginAt: "2019",
+      endAt:"2021",
       iconUrl: "https://upload.wikimedia.org/wikipedia/fr/1/15/Logotype_Universit%C3%A9_Nangui_Abrogoua.png"
     },
     {
@@ -90,8 +90,8 @@ export class HomeComponent {
       city: "Abidjan",
       country: this.IVORY_COAST,
       schoolName:this.UNIV_NANGUI,
-      beginAt: "Sept. 2016",
-      endAt:"Août 2019",
+      beginAt: "2016",
+      endAt:"2019",
       iconUrl: "https://upload.wikimedia.org/wikipedia/fr/1/15/Logotype_Universit%C3%A9_Nangui_Abrogoua.png"
     }
   ]

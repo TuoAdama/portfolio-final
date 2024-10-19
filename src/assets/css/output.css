@@ -1546,6 +1546,10 @@ select {
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
+.disabled\:bg-sky-700\/20:disabled {
+  background-color: rgb(3 105 161 / 0.2);
+}
+
 @media (min-width: 640px) {
   .sm\:text-sm {
     font-size: 0.875rem;

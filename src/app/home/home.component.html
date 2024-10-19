@@ -57,7 +57,9 @@
 
 <app-skill-section></app-skill-section>
 
-<div class=" mt-10 flex justify-center items-center border border-x-red-800">
-  <app-experience-section class="flex-1" [items]="experiences" name="Experiences"></app-experience-section>
-  <app-experience-section class="flex-1" [items]="experiences" name="Formations"></app-experience-section>
+<div class="text-center my-16 text-3xl font-semibold pb-2">MON PARCOURS</div>
+
+<div class="mt-10 flex flex-col md:flex-row justify-center items-center md:ps-14">
+  <app-experience-section class="w-[44%]"  [items]="experiences" name="Experiences"></app-experience-section>
+  <app-experience-section class="w-[44%]"  [items]="experiences" name="Formations"></app-experience-section>
 </div>

@@ -5,4 +5,5 @@ export interface BaseExperience {
   iconUrl?: String;
   beginAt: String;
   endAt: String;
+  description?: String;
 }

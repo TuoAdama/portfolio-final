@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {ExperienceItemComponent} from "../experience-item/experience-item.component";
 import {BaseExperience} from "../../models/BaseExperience";
+import { Experience } from '../../models/Experience';
 
 @Component({
   selector: 'app-experience-section',
@@ -13,5 +14,5 @@ import {BaseExperience} from "../../models/BaseExperience";
 })
 export class ExperienceSectionComponent {
   @Input({required: true}) name: string = "";
-  @Input({required: true}) items: BaseExperience[] | undefined;
+  @Input({required: true}) items: Experience[] | undefined;
 }

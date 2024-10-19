@@ -1,10 +1,29 @@
 <div>
-  <div class="fs-4 fw-bold mb-3">{{ name }}</div>
-  <div class="row">
-    @for (item of items; track item.name){
-      <div class="col-12">
-        <app-experience-item [item]="item"/>
+  @for (item of items; track $index) {
+    <div class="flex flex-col border space-y-6 p-3 w-[30%] mb-3 shadow timeline-item">
+      <div class="flex space-x-3">
+        <div>
+          <img [src]="item.iconUrl" class="border h-16 w-16">
+        </div>
+        <div class="flex-1 space-y-1">
+          <div class="font-semibold text-xl">{{item.company}}</div>
+          <div class="text-lg text-zinc-600">{{item.city}}</div>
+        </div>
       </div>
-    }
-  </div>
+      <div class="space-y-3">
+        <div class="text-xl">Missions principales</div>
+        <ul class="ps-5 space-y-3">
+          <li class="list-disc">Missions principales</li>
+          <li class="list-disc">Missions principales</li>
+          <li class="list-disc">Missions principales</li>
+        </ul>
+      </div>
+      <div class="flex justify-end">
+        <img class="h-7 w-7" src="../../assets/images/icons/typescript.png" alt="programming language icoon">
+        <img class="h-7 w-7" src="../../assets/images/icons/vuejs.png" alt="programming language icoon">
+        <img class="h-7 w-7" src="../../assets/images/icons/symfony.png" alt="programming language icoon">
+        <img class="h-7 w-7" src="../../assets/images/icons/more-techno.png" alt="programming language icoon">
+      </div>
+    </div>
+  }
 </div>

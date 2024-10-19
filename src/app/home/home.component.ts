@@ -24,7 +24,7 @@ import { SkillSectionComponent } from "../skill-section/skill-section.component"
     ContactComponent,
     FooterComponent,
     SilderComponent,
-    SkillSectionComponent
+    SkillSectionComponent,
 ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

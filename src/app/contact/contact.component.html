@@ -1,34 +1,30 @@
-<div class="col-md-6 col-sm-12 bg-gray p-3 card shadow">
-  <div class="row">
-    <div class="col-12">
-      <h3>Contactez-moi</h3>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" id="email" class="form-control" formControlName="email">
-        </div>
-        <div class="form-group my-3">
-          <label for="title">Sujet:</label>
-          <input type="text" id="title" class="form-control" formControlName="subject">
-        </div>
-        <div class="form-group">
-          <label for="message">Message:</label>
-          <textarea id="message" cols="30" rows="10" class="form-control" formControlName="body"></textarea>
-        </div>
-        <div class="form-group">
-          <button [disabled]="!form.valid" class="btn btn-dark mt-3">Envoyer</button>
-        </div>
-      </form>
+<h3 class="text-3xl font-semibold text-center py-10">Contactez-moi</h3>
+<div class="pl-16 py-12 card shadow flex items-center justify-center">
+  <div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
       @if(showCommentSendMessage){
-        <div class="alert alert-success mt-3 d-flex justify-content-between align-items-center">
+        <div class="rounded bg-green-500/75 mt-3 flex p-3 justify-between items-center">
           <div>Votre message a bien été envoyé !</div>
-          <button class="btn" (click)="showCommentSendMessage = false">X</button>
+          <button class="btn hover:text-red-400 hover:border hover:border-black p-1 rounded" (click)="showCommentSendMessage = false">X</button>
         </div>
       }
-    </div>
+      <div class="grid grid-cols-2 gap-5">
+        <div>
+          <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Nom:</label>
+          <input class="rounded-md shadow-sm ring-1 ring-inset ring-gray-400" type="text" id="title" formControlName="subject">
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email:</label>
+          <input class="rounded-md shadow-sm ring-1 ring-inset ring-gray-400" type="email" id="email" formControlName="email">
+        </div>
+        <textarea id="message" cols="30" rows="10" class="col-span-2 rounded-md shadow-sm ring-1 ring-inset ring-gray-400" formControlName="body"></textarea>
+      </div>
+      <div>
+        <button [disabled]="!form.valid" class="bg-sky-700 text-white px-3 py-1 rounded my-3">Envoyer</button>
+      </div>
+    </form>
+  </div>
+  <div>
+    <img src="../../assets/images/man-study.png" class="w-96 h-96" alt="young with a book" />
   </div>
 </div>

@@ -2,6 +2,7 @@ import {Component, inject} from '@angular/core';
 import {Contact} from "../../models/Contact";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ContactService} from "../services/contact.service";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-contact',
@@ -9,6 +10,7 @@ import {ContactService} from "../services/contact.service";
   imports: [
     FormsModule,
     ReactiveFormsModule,
+    NgOptimizedImage,
   ],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'

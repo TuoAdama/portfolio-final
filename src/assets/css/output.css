@@ -1574,6 +1574,10 @@ select {
   border-radius: calc(var(--btn-border-radius) + 4px);
 }
 
+.rounded-sm {
+  border-radius: 0.125rem;
+}
+
 .rounded-b-\[--card-border-radius\] {
   border-bottom-right-radius: var(--card-border-radius);
   border-bottom-left-radius: var(--card-border-radius);
@@ -2142,6 +2146,11 @@ select {
 .text-zinc-700 {
   --tw-text-opacity: 1;
   color: rgb(63 63 70 / var(--tw-text-opacity));
+}
+
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .placeholder-gray-400::-moz-placeholder {

@@ -1,7 +1,12 @@
 /** @type {import('tailwindcss').Config} */
+
 import defaultTheme from "tailwindcss/defaultTheme";
+import themer from "@tailus/themer";
+
 module.exports = {
-  content: ["./src/**/*.{html,js}"],
+  content: [
+    "./src/**/*.{html,js}",
+  ],
   theme: {
     extend: {
 
@@ -20,6 +25,20 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/forms'),
+    themer({
+      palette: {
+        extend : "nature"
+      },
+      radius: "smoothest",
+      background: "light",
+      border: "light",
+      padding:"large",
+      components: {
+        button: {
+          rounded : "2xl"
+        }
+      }
+    })
   ],
 }
 

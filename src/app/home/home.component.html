@@ -423,9 +423,24 @@
             </div>
             <div>
               <div>
-                                    <pre class="px-[--card-padding]">
-                                        <code class="text-sm font-mono"></code>
-                                    </pre>
+                    <pre class="px-[--card-padding]">
+                        <code class="text-sm font-mono">
+      import Annonce from "tailus-ui/Annonce";
+
+      export default () =&gt; &#123;
+                                return (
+              &lt;Annonce.Root variant="outlined"&gt;
+                  &lt;Annonce.Concern intent="primary"&gt;
+                      New
+                  &lt;/Annonce.Concern&gt;
+                  &lt;Annonce.Message&gt;
+                      Say hello to the new Tailus !
+                  &lt;/Annonce.Message&gt;
+              &lt;/Annonce.Root&gt;
+          )
+      &#125;
+                        </code>
+                    </pre>
               </div>
             </div>
           </div>

@@ -12,6 +12,7 @@ import {FooterComponent} from "../footer/footer.component";
 import {SilderComponent} from "../silder/silder.component";
 import { SkillSectionComponent } from "../skill-section/skill-section.component";
 import {ProjectComponent} from "../project/project.component";
+import {TechnoComponent} from "../techno/techno.component";
 
 @Component({
   selector: 'app-home',
@@ -27,6 +28,7 @@ import {ProjectComponent} from "../project/project.component";
     SilderComponent,
     SkillSectionComponent,
     ProjectComponent,
+    TechnoComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

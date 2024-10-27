@@ -11,5 +11,8 @@ import Project from "../../models/Project";
 export class ProjectItemComponent {
 
   @Input({required: true})
-  project!: Project;
+  name!: string;
+
+  @Input({required: true})
+  description!: string;
 }

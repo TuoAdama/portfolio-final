@@ -833,6 +833,10 @@ select {
   border-width: 0;
 }
 
+.visible {
+  visibility: visible;
+}
+
 .fixed {
   position: fixed;
 }
@@ -957,6 +961,11 @@ select {
 .my-12 {
   margin-top: 3rem;
   margin-bottom: 3rem;
+}
+
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .-mb-\[--card-padding\] {
@@ -1192,6 +1201,10 @@ select {
   height: 100%;
 }
 
+.h-20 {
+  height: 5rem;
+}
+
 .w-16 {
   width: 4rem;
 }
@@ -1251,6 +1264,10 @@ select {
 
 .w-full {
   width: 100%;
+}
+
+.w-20 {
+  width: 5rem;
 }
 
 .max-w-2xl {
@@ -1836,6 +1853,11 @@ select {
 .bg-clip-text {
   -webkit-background-clip: text;
           background-clip: text;
+}
+
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .object-cover {

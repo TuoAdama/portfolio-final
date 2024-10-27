@@ -1716,6 +1716,10 @@ select {
   padding: 4rem;
 }
 
+.p-8 {
+  padding: 2rem;
+}
+
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -2717,6 +2721,10 @@ select {
 
   .md\:gap-0 {
     gap: 0px;
+  }
+
+  .md\:p-16 {
+    padding: 4rem;
   }
 
   .md\:px-12 {

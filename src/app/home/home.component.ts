@@ -13,6 +13,8 @@ import {SilderComponent} from "../silder/silder.component";
 import { SkillSectionComponent } from "../skill-section/skill-section.component";
 import {ProjectComponent} from "../project/project.component";
 import {TechnoComponent} from "../techno/techno.component";
+import {ProjectItemComponent} from "../project-item/project-item.component";
+import {ParcoursComponent} from "../parcours/parcours.component";
 
 @Component({
   selector: 'app-home',
@@ -29,6 +31,8 @@ import {TechnoComponent} from "../techno/techno.component";
     SkillSectionComponent,
     ProjectComponent,
     TechnoComponent,
+    ProjectItemComponent,
+    ParcoursComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

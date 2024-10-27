@@ -2014,6 +2014,18 @@ select {
   padding-top: 2.25rem;
 }
 
+.pt-10 {
+  padding-top: 2.5rem;
+}
+
+.pt-8 {
+  padding-top: 2rem;
+}
+
+.pt-5 {
+  padding-top: 1.25rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -2956,6 +2968,10 @@ select {
 
   .md\:pr-6 {
     padding-right: 1.5rem;
+  }
+
+  .md\:pt-36 {
+    padding-top: 9rem;
   }
 
   .md\:text-5xl {

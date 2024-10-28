@@ -44,6 +44,15 @@ export class HomeComponent {
   readonly UNIV_RENNES: string = "Université de Rennes";
   readonly UNIV_NANGUI: string = "Université Nangui Abrogoua";
 
+  readonly contacts: any = {
+    email: "tuoadama17@gmail.com",
+    number: "+33 7 51 09 71 77",
+    linkedIn: "https://www.linkedin.com/in/adama-tuo-6a8132a1",
+    github: "https://github.com/TuoAdama",
+    twitter: "https://x.com/demci_tuo",
+  }
+
+
   experiences: Experience[] = [
     {
       name: "Développeur Full-Stack",

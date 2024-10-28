@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
   title = 'portfilio-angular';
   analyticService = inject(AnalyticService);
 
+
+
   ngOnInit() {
     //this.analyticService.analytics().subscribe(r => {})
   }

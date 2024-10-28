@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {Contact} from "../../models/Contact";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ContactService} from "../services/contact.service";
@@ -16,17 +16,14 @@ import {NgOptimizedImage, SlicePipe} from "@angular/common";
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit{
 
   contactService: ContactService = inject(ContactService);
   showCommentSendMessage: boolean = false;
+  contacts!: any;
 
-  readonly contacts: any = {
-    email: "tuoadama17@gmail.com",
-    number: "+33 7 51 09 71 77",
-    linkedIn: "https://www.linkedin.com/in/adama-tuo-6a8132a1",
-    github: "https://github.com/TuoAdama",
-    twitter: "https://x.com/demci_tuo",
+  ngOnInit(): void {
+    this.contacts = this.contactService.getContacts();
   }
 
    form: FormGroup = new FormGroup({

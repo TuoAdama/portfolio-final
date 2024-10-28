@@ -2,7 +2,7 @@ import {Component, inject} from '@angular/core';
 import {Contact} from "../../models/Contact";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ContactService} from "../services/contact.service";
-import {NgOptimizedImage} from "@angular/common";
+import {NgOptimizedImage, SlicePipe} from "@angular/common";
 
 @Component({
   selector: 'app-contact',
@@ -11,6 +11,7 @@ import {NgOptimizedImage} from "@angular/common";
     FormsModule,
     ReactiveFormsModule,
     NgOptimizedImage,
+    SlicePipe,
   ],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
@@ -19,6 +20,14 @@ export class ContactComponent {
 
   contactService: ContactService = inject(ContactService);
   showCommentSendMessage: boolean = false;
+
+  readonly contacts: any = {
+    email: "tuoadama17@gmail.com",
+    number: "+33 7 51 09 71 77",
+    linkedIn: "https://www.linkedin.com/in/adama-tuo-6a8132a1",
+    github: "https://github.com/TuoAdama",
+    twitter: "https://x.com/demci_tuo",
+  }
 
    form: FormGroup = new FormGroup({
      email: new FormControl("", [Validators.required, Validators.email]),
@@ -37,5 +46,9 @@ export class ContactComponent {
           alert(error.toString())
         })
     }
+  }
+
+  getSocialName(link: string): string {
+    return link.substring(link.lastIndexOf("/")+1);
   }
 }

@@ -16,8 +16,7 @@ export class AppComponent implements OnInit {
   analyticService = inject(AnalyticService);
 
 
-
   ngOnInit() {
-    //this.analyticService.analytics().subscribe(r => {})
+    this.analyticService.analytics().subscribe(r => {})
   }
 }

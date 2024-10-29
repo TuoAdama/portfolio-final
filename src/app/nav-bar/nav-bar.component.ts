@@ -19,6 +19,6 @@ export class NavBarComponent {
      twitter: "https://x.com/demci_tuo",
      linkedin: "https://www.linkedin.com/in/adama-tuo-6a8132a1",
   }
-toggle: boolean = false;
+showNav: boolean = false;
 
 }

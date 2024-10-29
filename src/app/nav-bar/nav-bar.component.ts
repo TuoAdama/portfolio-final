@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {LogoComponent} from "../logo/logo.component";
@@ -18,4 +19,6 @@ export class NavBarComponent {
      twitter: "https://x.com/demci_tuo",
      linkedin: "https://www.linkedin.com/in/adama-tuo-6a8132a1",
   }
+toggle: boolean = false;
+
 }

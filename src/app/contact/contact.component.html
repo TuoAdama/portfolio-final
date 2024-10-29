@@ -35,11 +35,11 @@
           </ul>
         </div>
         <div class="overflow-hidden lg:col-span-3 border bg-white dark:bg-[--card-dark-bg] rounded-[--card-border-radius] border-[--ui-light-border-color] dark:border-[--ui-dark-border-color]">
-          <div class="p-8 md:p-16">
+          <div class="p-8">
             <div class="w-full md:w-9/12 mx-auto">
               <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 @if(showCommentSendMessage){
-                  <div class="rounded bg-green-500/75 mt-3 flex p-3 justify-between items-center">
+                  <div class="rounded bg-primary-500 my-4 text-black dark:text-white mt-3 flex p-3 justify-between items-center">
                     <div>Votre message a bien été envoyé !</div>
                     <button class="btn hover:text-red-400 hover:border hover:border-black p-1 rounded" (click)="showCommentSendMessage = false">X</button>
                   </div>

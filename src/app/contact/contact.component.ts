@@ -49,6 +49,4 @@ export class ContactComponent implements OnInit{
   getSocialName(link: string): string {
     return link.substring(link.lastIndexOf("/")+1);
   }
-
-  protected readonly alert = alert;
 }

@@ -7,10 +7,10 @@
       <div class="relative">
         <div class="relative z-10 grid gap-3 grid-cols-6">
           <div class="col-span-full lg:col-span-3 overflow-hidden relative p-[--card-padding] rounded-[--card-border-radius] bg-white border border-[--ui-light-border-color] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-            <app-experience-item></app-experience-item>
+            <app-experience-item [experience]="experiences" ></app-experience-item>
           </div>
           <div class="col-span-full lg:col-span-3 overflow-hidden relative p-[--card-padding] rounded-[--card-border-radius] bg-white border border-[--ui-light-border-color] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-            <app-experience-item></app-experience-item>
+            <app-experience-item [experience]="formations"></app-experience-item>
           </div>
         </div>
       </div>

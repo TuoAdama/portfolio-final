@@ -9,5 +9,6 @@ import {BaseExperience} from "../../models/BaseExperience";
   styleUrl: './experience-item.component.css'
 })
 export class ExperienceItemComponent {
-
+  @Input({required: true})
+  experience!: BaseExperience[];
 }

@@ -6,4 +6,5 @@ export interface BaseExperience {
   beginAt: String;
   endAt: String;
   description?: String;
+  structureName?: String;
 }

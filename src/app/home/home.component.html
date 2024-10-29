@@ -1,12 +1,7 @@
-<app-presentation/>
-<div class="row bg-light my-3" id="experiences">
-    <div class="p-3 col-xs-12 col-md-6">
-        <app-experience-section name="Expériences Professionelles" [items]="experiences"/>
-    </div>
-    <div class="p-3 col-xs-12 col-md-6">
-        <app-experience-section name="Formations" [items]="formations"/>
-    </div>
-</div>
-<div class="row" id="contact-me">
-    <app-contact/>
-</div>
+<main class="overflow-hidden">
+  <app-presentation/>
+  <app-project id="projets"/>
+  <app-parcours id="parcours"/>
+  <app-techno id="stacks"/>
+  <app-contact id="contact"/>
+</main>

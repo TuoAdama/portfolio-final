@@ -1,0 +1,13 @@
+<div>
+  <div>
+    <div class="relative aspect-square rounded-full size-32 flex border mx-auto dark:bg-white/5 dark:border-white/10 before:absolute before:-inset-2 before:border dark:before:border-white/5 dark:before:bg-white/5 before:rounded-full">
+      <ng-content select="[image]"></ng-content>
+    </div>
+    <div class="mt-6 text-center relative z-10 space-y-2">
+      <h2 class="text-lg font-medium text-gray-800 transition group-hover:text-secondary-950 dark:text-white">{{name}}</h2>
+      <div class="dark:text-gray-300 text-gray-700">
+        <ng-content select="[description]"></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

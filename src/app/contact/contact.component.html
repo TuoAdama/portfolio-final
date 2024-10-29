@@ -1,34 +1,84 @@
-<div class="col-md-6 col-sm-12 bg-gray p-3 card shadow">
-  <div class="row">
-    <div class="col-12">
-      <h3>Contactez-moi</h3>
+<section>
+  <div class="pt-36 mb-10">
+    <div class="mx-auto px-6 max-w-6xl text-gray-500">
+      <div class="grid gap-12 md:gap-0 md:grid-cols-2 lg:grid-cols-5 items-center lg:gap-24">
+        <div class="h-full lg:col-span-2">
+          <div class="md:pr-6 lg:pr-0">
+            <h2 class="text-3xl text-gray-950 dark:text-white font-semibold">Contactez-moi</h2>
+          </div>
+          <ul class="mt-8 divide-y border-y border-[--ui-light-border-color] dark:border-[--ui-dark-border-color] divide-[--ui-light-border-color] dark:divide-[--ui-dark-border-color] *:py-3 *:flex *:items-center *:gap-3 text-gray-700 dark:text-gray-300">
+            <li>
+              <svg class="size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m7 9l5 3.5L17 9"/>
+                  <path d="M2 17V7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2Z"/>
+                </g>
+              </svg>
+              <a href="mailto:{{contacts.email}}">{{ contacts.email }}</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-phone"></i>
+              <a href="tel:{{contacts.number.replaceAll(' ', '')}}">{{contacts.number}}</a>
+            </li>
+            <li >
+              <i class="fa-brands fa-linkedin"></i>
+              <a [href]="contacts.linkedIn">{{getSocialName(contacts.linkedIn)}}</a>
+            </li>
+            <li >
+              <i class="fa-brands fa-github"></i>
+              <a [href]="contacts.github">{{getSocialName(contacts.github)}}</a>
+            </li>
+            <li>
+              <i class="fa-brands fa-square-x-twitter"></i>
+              <a [href]="contacts.twitter">{{getSocialName(contacts.twitter)}}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="overflow-hidden lg:col-span-3 border bg-white dark:bg-[--card-dark-bg] rounded-[--card-border-radius] border-[--ui-light-border-color] dark:border-[--ui-dark-border-color]">
+          <div class="p-8">
+            <div class="w-full md:w-9/12 mx-auto">
+              <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                @if(showCommentSendMessage){
+                  <div class="rounded bg-primary-500 my-4 text-black dark:text-white mt-3 flex p-3 justify-between items-center">
+                    <div>Votre message a bien été envoyé !</div>
+                    <button class="btn hover:text-red-400 hover:border hover:border-black p-1 rounded" (click)="showCommentSendMessage = false">X</button>
+                  </div>
+                }
+                <div class="space-y-6">
+                  <div class="space-y-2">
+                    <label class="block dark:text-white text-sm" for="email">Email:</label>
+                    <input id="email" type="email" formControlName="email" class="w-full border border-[--ui-dark-border-color] dark:text-white shadow-lg rounded-lg bg-[--ui-bg] px-3 py-5 h-9 text-md">
+                  </div>
+                  <div class="space-y-2">
+                    <label class="block dark:text-white text-sm" for="subject">Nom:</label>
+                    <input type="text" id="subject" formControlName="subject" class="w-full border border-[--ui-dark-border-color] dark:text-white shadow-lg rounded-lg bg-[--ui-bg] px-3 py-5 h-9 text-md">
+                  </div>
+                  <div class="space-y-2">
+                    <label for="body" class="block dark:text-white text-sm">Message:</label>
+                    <textarea
+                      id="body"
+                      formControlName="body"
+                      rows="5"
+                      class="h-auto w-full overflow-hidden border border-[--ui-dark-border-color] dark:text-white shadow-lg rounded-lg bg-[--ui-bg] px-3 py-5 text-md"
+                    ></textarea>
+                  </div>
+                  <div>
+                    <div class="p-1 rounded-[calc(var(--btn-border-radius)+4px)] bg-gray-950/5 border dark:border-white/10 dark:bg-white/5">
+                      <button
+                        [disabled]="form.invalid"
+                        type="submit"
+                        class="w-full *:select-none dark:shadow-primary-500/10 *:disabled:opacity-20 disabled:*:text-gray-300 disabled:dark:*:text-gray-700 dark:*:disabled:!text-white group relative z-[1] flex h-11 items-center justify-center gap-1.5 rounded-[--btn-border-radius] border border-primary-600 bg-primary-500 px-4 text-base text-white shadow-md shadow-primary-200 before:absolute before:inset-0 before:rounded-[calc(var(--btn-border-radius)-1px)] before:border before:border-primary-500 before:bg-gradient-to-b before:from-primary-600 hover:bg-primary-600 active:bg-primary-700 disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950/40 disabled:before:border-transparent disabled:before:bg-gray-100 disabled:before:from-transparent dark:border-0 dark:bg-primary-600 dark:before:border-0 dark:before:border-t dark:before:border-primary-400 dark:before:shadow-inner dark:before:shadow-white/10 dark:hover:bg-primary-700 dark:active:bg-primary-800 dark:active:before:from-primary-700 dark:disabled:border dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:disabled:before:bg-gray-900 dark:disabled:before:from-gray-900 dark:disabled:before:shadow-none [&>*:not(.sr-only)]:relative"
+                      >
+                        <span class="text-nowrap">Envoyer</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" id="email" class="form-control" formControlName="email">
-        </div>
-        <div class="form-group my-3">
-          <label for="title">Sujet:</label>
-          <input type="text" id="title" class="form-control" formControlName="subject">
-        </div>
-        <div class="form-group">
-          <label for="message">Message:</label>
-          <textarea id="message" cols="30" rows="10" class="form-control" formControlName="body"></textarea>
-        </div>
-        <div class="form-group">
-          <button [disabled]="!form.valid" class="btn btn-dark mt-3">Envoyer</button>
-        </div>
-      </form>
-      @if(showCommentSendMessage){
-        <div class="alert alert-success mt-3 d-flex justify-content-between align-items-center">
-          <div>Votre message a bien été envoyé !</div>
-          <button class="btn" (click)="showCommentSendMessage = false">X</button>
-        </div>
-      }
-    </div>
-  </div>
-</div>
+</section>

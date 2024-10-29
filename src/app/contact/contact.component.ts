@@ -1,7 +1,8 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {Contact} from "../../models/Contact";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ContactService} from "../services/contact.service";
+import {NgOptimizedImage, SlicePipe} from "@angular/common";
 
 @Component({
   selector: 'app-contact',
@@ -9,14 +10,21 @@ import {ContactService} from "../services/contact.service";
   imports: [
     FormsModule,
     ReactiveFormsModule,
+    NgOptimizedImage,
+    SlicePipe,
   ],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit{
 
   contactService: ContactService = inject(ContactService);
   showCommentSendMessage: boolean = false;
+  contacts!: any;
+
+  ngOnInit(): void {
+    this.contacts = this.contactService.getContacts();
+  }
 
    form: FormGroup = new FormGroup({
      email: new FormControl("", [Validators.required, Validators.email]),
@@ -35,5 +43,9 @@ export class ContactComponent {
           alert(error.toString())
         })
     }
+  }
+
+  getSocialName(link: string): string {
+    return link.substring(link.lastIndexOf("/")+1);
   }
 }

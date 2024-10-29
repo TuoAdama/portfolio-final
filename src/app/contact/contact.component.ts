@@ -21,7 +21,6 @@ export class ContactComponent implements OnInit{
   contactService: ContactService = inject(ContactService);
   showCommentSendMessage: boolean = false;
   contacts!: any;
-  demo: string = "Tuo";
 
   ngOnInit(): void {
     this.contacts = this.contactService.getContacts();

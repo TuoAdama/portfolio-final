@@ -1,4 +1,5 @@
 export interface BaseExperience {
+  id: number;
   name: String;
   city: String;
   country: string;

@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {ProjectItemComponent} from "../project-item/project-item.component";
 import {ExperienceItemComponent} from "../experience-item/experience-item.component";
 import {ExperienceService} from "../services/experience.service";
@@ -15,8 +15,13 @@ import {Formation} from "../../models/Formation";
   templateUrl: './parcours.component.html',
   styleUrl: './parcours.component.css'
 })
-export class ParcoursComponent {
+export class ParcoursComponent implements OnInit{
+
   experienceService: ExperienceService = inject(ExperienceService);
   experiences: Experience[] = [];
   formations: Formation[] = [];
+  ngOnInit(): void {
+      this.experiences = this.experienceService.getExperiences();
+      this.formations = this.experienceService.getFormations();
+  }
 }

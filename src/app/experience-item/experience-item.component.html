@@ -15,33 +15,29 @@
   </div>
   <div class="basis-full md:basis-8/12 mt-6 relative sm:-mr-[--card-padding] sm:-my-[--card-padding] before:absolute before:w-px before:inset-0 before:mx-auto before:bg-[--ui-light-border-color] dark:before:bg-[--ui-dark-border-color]">
     <div class="relative space-y-6 py-6 flex flex-col justify-center h-full">
-      <div class="flex items-center justify-end gap-2 w-[calc(50%+0.875rem)] relative">
-        <div class="flex h-fit text-xs flex-col px-2 py-1 shadow-sm border rounded-md dark:bg-gray-800 dark:border-white/5 dark:text-white">
-          <span class="font-semibold">Dev. fullstack</span>
-          <span class="text-[0.7rem]">Orange Business</span>
-        </div>
-        <div class="size-8 ring-4 ring-white dark:ring-[--card-dark-bg]">
-          <img class="rounded  border border-gray-950/5 dark:border-white/5 size-full" src="https://reseaux.orange-business.com/wp-content/uploads/2022/03/favicon.png" alt="">
-        </div>
-      </div>
-      <div class="flex items-center gap-2 ml-[calc(50%-1rem)] relative">
-        <div class="size-8 ring-4 ring-white dark:ring-[--card-dark-bg]">
-          <img class="rounded  border border-gray-950/5 dark:border-white/5 size-full" src="https://media.licdn.com/dms/image/v2/C4D0BAQFggP8cthzMsg/company-logo_200_200/company-logo_200_200/0/1672473629862/onemart_distributors_logo?e=1734566400&v=beta&t=v6TEQrupuoPgCehgzZLatFhS-vWvyoxpQNvgZsB1QfM" alt="">
-        </div>
-        <div class="flex h-fit text-xs flex-col px-2 py-1 shadow-sm border rounded-md dark:bg-gray-800 dark:border-white/5 dark:text-white">
-          <span>Developpeur web</span>
-          <span>OneMart</span>
-        </div>
-      </div>
-      <div class="flex items-center justify-end gap-2 w-[calc(50%+0.875rem)] relative">
-        <div class="flex h-fit text-xs flex-col px-2 py-1 shadow-sm border rounded-md dark:bg-gray-800 dark:border-white/5 dark:text-white">
-          <span>Architecte logiciel</span>
-          <span>Ekip Services</span>
-        </div>
-        <div class="size-7 ring-4 ring-white dark:ring-[--card-dark-bg]">
-          <img class="rounded  border border-gray-950/5 dark:border-white/5 size-full" src="https://media.licdn.com/dms/image/v2/C4E0BAQF2N1S2LYm81Q/company-logo_200_200/company-logo_200_200/0/1677783941943?e=1734566400&v=beta&t=FrdEYLhhsPzk8VUAB64xTLz9INiJFe9EGk-9bR9HYXM" alt="">
-        </div>
-      </div>
+      @for(exp of experience; track exp.id){
+        @if($odd){
+          <div class="flex items-center justify-end gap-2 w-[calc(50%+0.875rem)] relative">
+            <div class="flex h-fit text-xs flex-col px-2 py-1 shadow-sm border rounded-md dark:bg-gray-800 dark:border-white/5 dark:text-white">
+              <span class="font-semibold">{{exp.name}}</span>
+              <span class="text-[0.7rem]">{{ exp.structureName }}</span>
+            </div>
+            <div class="size-8 ring-4 ring-white dark:ring-[--card-dark-bg]">
+              <img class="rounded  border border-gray-950/5 dark:border-white/5 size-full" [src]="exp.iconUrl" alt="">
+            </div>
+          </div>
+        } @else {
+          <div class="flex items-center gap-2 ml-[calc(50%-1rem)] relative">
+            <div class="size-8 ring-4 ring-white dark:ring-[--card-dark-bg]">
+              <img class="rounded  border border-gray-950/5 dark:border-white/5 size-full" [src]="exp.iconUrl" alt="">
+            </div>
+            <div class="flex h-fit text-xs flex-col px-2 py-1 shadow-sm border rounded-md dark:bg-gray-800 dark:border-white/5 dark:text-white">
+              <span class="font-semibold">{{exp.name}}</span>
+              <span>{{exp.structureName}}</span>
+            </div>
+          </div>
+        }
+      }
     </div>
   </div>
 </div>

@@ -34,9 +34,6 @@ export class ContactComponent implements OnInit{
    })
 
   onSubmit(){
-    alert(this.form.valid ? "Is Valid": "Not valid OK");
-    return;
-
     if (this.form.valid) {
       this.contactService.postContact(this.form.value as Contact)
         .pipe()

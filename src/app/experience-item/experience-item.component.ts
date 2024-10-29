@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {BaseExperience} from "../../models/BaseExperience";
 import {NgOptimizedImage} from "@angular/common";
 
@@ -11,12 +11,12 @@ import {NgOptimizedImage} from "@angular/common";
   templateUrl: './experience-item.component.html',
   styleUrl: './experience-item.component.css'
 })
-export class ExperienceItemComponent implements OnInit {
-  ngOnInit(): void {
-    console.log(this.experience.length)
-  }
+export class ExperienceItemComponent {
+
   @Input({required: true})
   experience!: BaseExperience[];
 
+  @Input({required: true})
+  name!: string;
 
 }

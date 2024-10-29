@@ -21,6 +21,7 @@ export class ContactComponent implements OnInit{
   contactService: ContactService = inject(ContactService);
   showCommentSendMessage: boolean = false;
   contacts!: any;
+  demo: string = "Tuo";
 
   ngOnInit(): void {
     this.contacts = this.contactService.getContacts();
@@ -33,6 +34,9 @@ export class ContactComponent implements OnInit{
    })
 
   onSubmit(){
+    alert(this.form.valid ? "Is Valid": "Not valid OK");
+    return;
+
     if (this.form.valid) {
       this.contactService.postContact(this.form.value as Contact)
         .pipe()
@@ -48,4 +52,6 @@ export class ContactComponent implements OnInit{
   getSocialName(link: string): string {
     return link.substring(link.lastIndexOf("/")+1);
   }
+
+  protected readonly alert = alert;
 }

@@ -1,33 +1,3 @@
-<!--<h3 class="text-3xl font-semibold text-center py-10">Contactez-moi</h3>
-<div class="pl-16 py-12 card shadow flex items-center justify-center">
-  <div>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      @if(showCommentSendMessage){
-        <div class="rounded bg-green-500/75 mt-3 flex p-3 justify-between items-center">
-          <div>Votre message a bien été envoyé !</div>
-          <button class="btn hover:text-red-400 hover:border hover:border-black p-1 rounded" (click)="showCommentSendMessage = false">X</button>
-        </div>
-      }
-      <div class="grid grid-cols-2 gap-5">
-        <div>
-          <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Nom:</label>
-          <input class="rounded-md shadow-sm ring-1 ring-inset ring-gray-400" type="text" id="title" formControlName="subject">
-        </div>
-        <div>
-          <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email:</label>
-          <input class="rounded-md shadow-sm ring-1 ring-inset ring-gray-400" type="email" id="email" formControlName="email">
-        </div>
-        <textarea id="message" cols="30" rows="10" class="col-span-2 rounded-md shadow-sm ring-1 ring-inset ring-gray-400" formControlName="body"></textarea>
-      </div>
-      <div>
-        <button [disabled]="!form.valid" class="disabled:bg-sky-700/20 bg-sky-700 text-white px-3 py-1 rounded my-3">Envoyer</button>
-      </div>
-    </form>
-  </div>
-  <div>
-    <img src="../../assets/images/man-study.png" class="w-96 h-96" alt="young with a book" />
-  </div>
-</div>-->
 <section>
   <div class="pt-36">
     <div class="mx-auto px-6 max-w-6xl text-gray-500">
@@ -67,19 +37,25 @@
         <div class="overflow-hidden lg:col-span-3 border bg-white dark:bg-[--card-dark-bg] rounded-[--card-border-radius] border-[--ui-light-border-color] dark:border-[--ui-dark-border-color]">
           <div class="p-8 md:p-16">
             <div class="w-full md:w-9/12 mx-auto">
-              <form action="" class="">
+              <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                @if(showCommentSendMessage){
+                  <div class="rounded bg-green-500/75 mt-3 flex p-3 justify-between items-center">
+                    <div>Votre message a bien été envoyé !</div>
+                    <button class="btn hover:text-red-400 hover:border hover:border-black p-1 rounded" (click)="showCommentSendMessage = false">X</button>
+                  </div>
+                }
                 <div class="space-y-6">
                   <div class="space-y-2">
-                    <label class="block text-white text-sm" for="email">Email:</label>
-                    <input class="w-full border border-[--ui-dark-border-color] text-white shadow-lg rounded-lg bg-[--ui-bg] px-3 py-5 h-9 text-md" type="email" id="email">
+                    <label class="block dark:text-white text-sm" for="email">Email:</label>
+                    <input formControlName="email" class="w-full border border-[--ui-dark-border-color] dark:text-white shadow-lg rounded-lg bg-[--ui-bg] px-3 py-5 h-9 text-md" type="email" id="email">
                   </div>
                   <div class="space-y-2">
-                    <label class="block text-white text-sm" for="name">Email:</label>
-                    <input class="w-full border border-[--ui-dark-border-color] text-white shadow-lg rounded-lg bg-[--ui-bg] px-3 py-5 h-9 text-md" type="email" id="name">
+                    <label class="block dark:text-white text-sm" for="subject">Nom:</label>
+                    <input  id="subject" formControlName="subject" class="w-full border border-[--ui-dark-border-color] dark:text-white shadow-lg rounded-lg bg-[--ui-bg] px-3 py-5 h-9 text-md" type="text">
                   </div>
                   <div class="space-y-2">
-                    <label class="block text-white text-sm" for="message">Message:</label>
-                    <textarea rows="30" class="w-full overflow-hidden border border-[--ui-dark-border-color] text-white shadow-lg rounded-lg bg-[--ui-bg] px-3 py-5 h-9 text-md" type="email" id="message"></textarea>
+                    <label for="body" class="block dark:text-white text-sm">Message:</label>
+                    <textarea id="body" formControlName="body" rows="30" class="w-full overflow-hidden border border-[--ui-dark-border-color] dark:text-white shadow-lg rounded-lg bg-[--ui-bg] px-3 py-5 h-9 text-md" type="email"></textarea>
                   </div>
                   <div>
                     <div class="p-1 rounded-[calc(var(--btn-border-radius)+4px)] bg-gray-950/5 border dark:border-white/10 dark:bg-white/5">

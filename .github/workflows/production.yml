@@ -25,9 +25,10 @@ jobs:
     - run: npm run build:prod
 
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     steps:
     - name: Run echo
       run: |
-        cd public && ls
+        cd ls
   

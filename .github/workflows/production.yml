@@ -28,6 +28,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Run echo
-    - run: |
+      run: |
         cd public && ls
   

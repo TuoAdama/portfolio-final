@@ -16,19 +16,36 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    
     - name: Use Node.js 20.x
       uses: actions/setup-node@v4
       with:
         node-version: 20.x
         cache: 'npm'
+    - name: Install dependencies
     - run: npm ci
+    
+    - name: Build for production
     - run: npm run build:prod
-    - run: ls -l
+
+    - name: upload dist as artficats
+      uses: actions/upload-artifact@v4.4.3
+      with:
+        name: dist
+        path: dist
+
 
   deploy:
+    name: deploy app
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - name: Run echo
-      run: ls -l
+    - name: Download artificat
+      uses: actions/download-artifact@v4.1.8
+      with:
+        name: dist
+        path: dist
+
+    - name: List dist directory file
+      run: ls -l dist/
   

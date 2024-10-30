@@ -7,13 +7,13 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-    branches: ["main"]
+    branches:
+      - main
 
 jobs:
+  
   build:
-
     runs-on: ubuntu-latest
-    
     steps:
     - uses: actions/checkout@v4
     - name: Use Node.js 20.x
@@ -23,3 +23,11 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build:prod
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run echo
+    - run: |
+        cd public && ls
+  

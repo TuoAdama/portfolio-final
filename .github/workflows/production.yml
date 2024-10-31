@@ -36,7 +36,7 @@ jobs:
 
 
   deploy:
-    name: deploy app
+    name: deploy
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -51,7 +51,7 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.SERVER_PRIVATE_KEY }}
         
-    - name: Deploy
+    - name: Deploy to remote server
       env:
         SERVER_HOST: ${{ secrets.SERVER_HOST }}
         SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}

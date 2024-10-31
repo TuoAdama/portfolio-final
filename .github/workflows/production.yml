@@ -57,7 +57,7 @@ jobs:
         SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}
         REMOTE_PATH: ${{ secrets.SERVER_PATH }}
       run: |
-        ssh -o StrictHostKeyChecking=no $SERVER_USERNAME@$SERVER_HOST "rm -f $REMOTE_PATH/*"
+        ssh -o StrictHostKeyChecking=no $SERVER_USERNAME@$SERVER_HOST "rm -r $REMOTE_PATH/*"
         scp -o StrictHostKeyChecking=no -r ./dist/portfilio-angular/browser/* $SERVER_USERNAME@$SERVER_HOST:$REMOTE_PATH
         
   

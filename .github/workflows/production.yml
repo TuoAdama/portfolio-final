@@ -57,6 +57,6 @@ jobs:
         SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}
         REMOTE_PATH: ${{ secrets.SERVER_PATH }}
       run: |
-        scp -r ./dist $SERVER_USERNAME@$SERVER_HOST:$REMOTE_PATH
+        scp -o StrictHostKeyChecking=no -r ./dist $SERVER_USERNAME@$SERVER_HOST:$REMOTE_PATH
         
   

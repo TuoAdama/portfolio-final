@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./:/app
+  reverse-proxy:
+    image: nginx:alpine
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/ssl:/etc/ssl/
+      - ./nginx/conf/:/etc/nginx/conf.d/
+      - ./nginx/logs/:/var/log/nginx/

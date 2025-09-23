@@ -2,10 +2,11 @@ version: "3.9"
 services:
   web:
     build: .
-    ports:
-      - "4200:4200"
     volumes:
       - ./:/app
+    ports:
+      - "4200:4200"
+
   reverse-proxy:
     image: nginx:alpine
     depends_on:

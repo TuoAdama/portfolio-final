@@ -16,6 +16,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx/ssl:/etc/ssl/
+      - ./nginx/ssl/:/etc/ssl/
       - ./nginx/conf/:/etc/nginx/conf.d/
       - ./nginx/logs/:/var/log/nginx/
+      - ./dist/portfolio/browser/:/var/www/html/portfolio/current:rwx

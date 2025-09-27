@@ -14,9 +14,9 @@ Run `docker compose run --rm web ng generate component component-name` to genera
 docker compose run --rm web npm install
 ```
 
-## Launch application
+## Launch Angular application
 ```bash
-docker compose run --rm web ng serve --host=0.0.0.0
+docker compose up web 
 ```
 
 ## tailwind

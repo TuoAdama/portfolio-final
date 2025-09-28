@@ -3,6 +3,11 @@
     src: "{{ nginx_src_conf_path }}"
     dest: "{{ nginx_dest_conf_path }}"
 
+- name: Create logs folder
+  file:
+    path: "{{ nginx_log_folder }}"
+    state: directory
+
 - name: Enable nginx conf
   file:
     state: link

@@ -6,7 +6,7 @@
     - init
 
 - name: Build project
-  hosts: all
+  hosts: localhost
   roles:
     - build
   tags:

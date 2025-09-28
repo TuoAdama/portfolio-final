@@ -1,5 +1,5 @@
 - name: Init deployment folders
-  hosts: all
+  hosts: barah
   roles:
     - init
   tags:
@@ -20,14 +20,14 @@
     - archive
 
 - name: Copy archive on server
-  hosts: all
+  hosts: barah
   roles:
     - copy_archive
   tags:
     - copy_archive
 
 - name: Unarchive build on server
-  hosts: all
+  hosts: barah
   roles:
     - unarchive
   tags:

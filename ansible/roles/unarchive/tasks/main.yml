@@ -1,5 +1,11 @@
+- name: File exists
+  stat:
+    path: "{{ archive_path }}"
+  register: file_check
+
 - name: Extract archive
   unarchive:
     src: "{{ archive_path }}"
-    dest: "{{ project_root_folder }}"
-    remote_src: yes
+    dest: "{{ release_folder }}"
+    remote_src:  "{{ remote }}"
+  when: file_check.stat.exists

@@ -1,6 +1,6 @@
 - name: Archive project
   archive:
     path: "{{ folder_to_archive }}/**"
-    dest: "{{ local_temporary_archive_path }}"
+    dest: "{{ archive_path }}"
     format: gz
     force_archive: true

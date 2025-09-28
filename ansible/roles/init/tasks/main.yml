@@ -3,10 +3,9 @@
     path: "{{ item }}"
     state: directory
     mode: '0755'
-    loop:
-      - "{{ project_root_folder }}"
-      - "{{ release_folder }}"
-      - "{{ log_folder }}"
+  loop:
+    - "{{ project_root_folder }}"
+    - "{{ release_folder }}"
 
 - name: Link current project folder to release folder
   file:

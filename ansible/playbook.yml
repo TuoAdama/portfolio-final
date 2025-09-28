@@ -12,8 +12,8 @@
   tags:
     - build
 
-- name: Archive build
-  hosts: all
+- name: Archive project build
+  hosts: localhost
   roles:
     - archive
   tags:

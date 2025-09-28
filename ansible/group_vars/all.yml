@@ -15,7 +15,7 @@ release_folder: "{{ project_root_folder }}/{{ release_name }}"
 current_project_folder: "{{ project_root_folder }}/current"
 
 #path where archive will store
-local_temporary_archive_path: "/tmp/portfolio/{{ release_name }}"
+local_temporary_archive_path: "/tmp/portfolio/{{ release_name }}.tar.gz"
 
 # archive on remote server
 archive_path: "{{ project_root_folder }}/{{ release_name }}.tar.gz"

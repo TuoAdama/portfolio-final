@@ -1,0 +1,5 @@
+- name: Extract archive
+  unarchive:
+    src: "{{ archive_path }}"
+    dest: "{{ project_root_folder }}"
+    remote_src: yes

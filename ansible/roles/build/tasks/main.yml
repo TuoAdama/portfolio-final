@@ -1,0 +1,9 @@
+- name: Install dependencies
+  command: "docker compose run --rm web npm install"
+  args:
+    chdir: "{{ local_project_root }}"
+
+- name: Build project
+  command: "docker compose run --rm web ng build"
+  args:
+    chdir: "{{ local_project_root }}"

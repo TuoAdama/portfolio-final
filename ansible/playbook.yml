@@ -1,0 +1,41 @@
+- name: Init deployment folders
+  hosts: all
+  roles:
+    - init
+  tags:
+    - init
+
+- name: Build project
+  hosts: all
+  roles:
+    - build
+  tags:
+    - build
+
+- name: Archive build
+  hosts: all
+  roles:
+    - archive
+  tags:
+    - archive
+
+- name: Copy archive on server
+  hosts: all
+  roles:
+    - copy_archive
+  tags:
+    - copy_archive
+
+- name: Unarchive build on server
+  hosts: all
+  roles:
+    - unarchive
+  tags:
+    - unarchive
+
+- name: Setup Nginx configuration
+  hosts: barah
+  roles:
+    - nginx
+  tags:
+    - nginx

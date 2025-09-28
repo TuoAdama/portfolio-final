@@ -19,3 +19,6 @@ current_project_folder: "{{ project_root_folder }}/current"
 # archive on host
 archive_path: "{{ project_root_folder }}/{{ release_name }}.tar.gz"
 
+# folder in which archive is store in local
+local_archive_path: "/tmp/portfolio/{{ release_name }}.tar.gz"
+

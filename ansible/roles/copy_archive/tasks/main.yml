@@ -1,8 +1,7 @@
 - name: Copy archive to remote server
   copy:
-    src: "{{ build_path }}"
-    dest: "{{ remote_build_dir }}"
+    src: "{{ local_archive_path }}"
+    dest: "{{ project_root_folder }}"
     owner: root
     group: root
     mode: '0644'
-  when: inventory_hostname != 'localhost'

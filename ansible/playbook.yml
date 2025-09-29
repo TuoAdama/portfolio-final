@@ -33,6 +33,13 @@
   tags:
     - unarchive
 
+- name: Create SSL/TLS certificate
+  hosts: barah
+  roles:
+    - https
+  tags:
+    - https
+
 - name: Setup Nginx configuration
   hosts: barah
   roles:

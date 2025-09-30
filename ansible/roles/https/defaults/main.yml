@@ -9,7 +9,7 @@ support_email: !vault |
 certificate_path: "/etc/letsencrypt/live/{{ dns }}/fullchain.pem"
 private_key_path: "/etc/letsencrypt/live/{{ dns }}/privkey.pem"
 
-certificate_mail_path: "{{ project_root_folder }}/https/"
+certificate_mail_path: "{{ project_root_folder }}/https"
 certificate_mail_file: "{{ certificate_mail_path }}/certificate_renew_mail.txt"
 
 # server mail infos
@@ -37,4 +37,6 @@ smtp_password: !vault |
   62336234616333363161613635633632613733663765316363303030373861613133
 
 
-certbot_standalone_post_hook_script: "curl --url {{ smtp_dns }} --ssl-reqd --mail-from {{ smtp_user }} --mail-rcpt {{ support_email }} --upload-file {{ certificate_mail_file }} --user {{ smtp_user }}:{{ smtp_password }}"
+mail_port: 465
+
+certbot_standalone_post_hook_script: "curl -v smtps://{{ smtp_dns }}:{{mail_port}} --mail-from {{ smtp_user }} --mail-rcpt {{ support_email }} --user {{ smtp_user }}:{{ smtp_password }} --upload-file {{ certificate_mail_file }}"

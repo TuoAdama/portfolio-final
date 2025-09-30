@@ -28,10 +28,11 @@
 
 - name: Create renew task with certbot
   cron:
-    name: "Renouvellement Let's Encrypt avec Certbot (standalone)"
+    name: "[portfolio] Renouvellement Let's Encrypt avec Certbot (standalone)"
     job: >
       certbot renew --quiet
       --post-hook "{{ certbot_standalone_post_hook_script }}"
     month: 2
     user: root
-  when: certbot_auto_renew
+  tags:
+    - crontab

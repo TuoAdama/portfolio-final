@@ -24,7 +24,7 @@
 - name: Create certificate renew mail file
   template:
     src: templates/certificate_renew_mail.txt.j2
-    dest: "{{ certificate_mail_path }}/{{ certificate_mail_filename }}"
+    dest: "{{ certificate_mail_file }}"
 
 - name: Create renew task with certbot
   cron:

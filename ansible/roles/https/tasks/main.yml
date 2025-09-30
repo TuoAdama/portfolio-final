@@ -15,10 +15,16 @@
   args:
     creates: "{{ certificate_path }}"
 
-- name: Create certificate renew file
-  copy:
+- name: create certificate https conf directory
+  file:
+    path: "{{ certificate_mail_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Create certificate renew mail file
+  template:
     src: templates/certificate_renew_mail.txt.j2
-    dest: "{{ certificate_mail_path }}"
+    dest: "{{ certificate_mail_path }}/{{ certificate_mail_filename }}"
 
 - name: Create renew task with certbot
   cron:

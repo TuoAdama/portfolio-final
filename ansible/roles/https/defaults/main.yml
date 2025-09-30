@@ -9,8 +9,8 @@ support_email: !vault |
 certificate_path: "/etc/letsencrypt/live/{{ dns }}/fullchain.pem"
 private_key_path: "/etc/letsencrypt/live/{{ dns }}/privkey.pem"
 
-
-certificate_mail_path: "{{ local_project_root }}/nginx/ssl/certificate_renew_mail.txt"
+certificate_mail_path: "{{ project_root_folder }}/https/"
+certificate_mail_filename: "certificate_renew_mail.txt"
 
 # server mail infos
 smtp_dns: !vault |

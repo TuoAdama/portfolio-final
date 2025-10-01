@@ -1,0 +1,38 @@
+- name: Find previous release name
+  command: ls -1 {{ project_root_folder }}
+  register: releases_list
+  failed_when: false
+  when: false
+
+
+- name: Get previous release name
+  set_fact:
+    previous_release: >-
+      {{ (releases_list.stdout_lines
+          | difference([release_name])   # remove release failed
+          | sort                         # sort by Ymd
+          | select('lt', release_name)   # keep only release < release failed
+          | last                         # last release < release failed
+          | default(omit)) }}
+
+- name: Delete the failed release folder
+  file:
+    path: "{{ project_root_folder }}/releases/{{ release_name }}"
+    state: absent
+
+- name: restore link to previous release
+  file:
+    src: "{{ project_root_folder }}/releases/{{ previous_release }}"
+    dest: "{{ current_project_folder }}"
+    state: link
+  when: previous_release is defined
+
+
+- name: Notify rollback
+  debug:
+    msg: >-
+      {% if previous_release is defined %}
+        Rollback done : restore release {{ previous_release }}
+      {% else %}
+      ️ No previous release found, rollback not possible
+      {% endif %}

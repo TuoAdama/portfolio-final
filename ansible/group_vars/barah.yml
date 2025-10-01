@@ -1,0 +1,5 @@
+#Nginx Configuration
+nginx_src_conf_path:  "{{ local_project_root }}/nginx/conf/nginx.prod.conf"
+nginx_dest_conf_path:  "/etc/nginx/sites-available/{{ dns }}"
+nginx_site_enable_conf_path: "/etc/nginx/sites-enabled/{{ dns }}"
+nginx_log_folder: "/var/log/nginx/{{ dns }}"

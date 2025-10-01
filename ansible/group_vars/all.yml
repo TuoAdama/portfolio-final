@@ -1,0 +1,24 @@
+dns: espace.atuo.fr
+project_root_folder: /var/www/html/portfolio
+
+remote: yes
+
+# root local project
+local_project_root: "{{ playbook_dir | dirname }}"
+
+# folder will be archived
+folder_to_archive: "{{ local_project_root }}/dist/portfolio/browser"
+
+# base on date when deploy is done: example: 20250928
+release_name: "{{ lookup('pipe', 'date +%Y%m%d') }}"
+release_folder: "{{ project_root_folder }}/{{ release_name }}"
+
+# symbolic link mapped with release folder
+current_project_folder: "{{ project_root_folder }}/current"
+
+# archive on host
+archive_path: "{{ project_root_folder }}/{{ release_name }}.tar.gz"
+
+# folder in which archive is store in local
+local_archive_path: "/tmp/portfolio/{{ release_name }}.tar.gz"
+

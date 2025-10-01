@@ -1,0 +1,7 @@
+dns: espace-local.atuo.fr
+project_root_folder: /tmp/portfolio
+
+#path where archive will store
+archive_path: "/tmp/portfolio/{{ release_name }}.tar.gz"
+
+remote: no

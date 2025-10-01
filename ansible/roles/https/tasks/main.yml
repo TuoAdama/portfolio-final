@@ -1,0 +1,38 @@
+- name: Install certbot
+  snap:
+    name: certbot
+    classic: true
+    state: present
+
+- name: Get SSL certificate via certbot standalone
+  command: >
+    certbot certonly --standalone
+    --preferred-challenges http
+    --email {{ support_email }}
+    --agree-tos
+    --no-eff-email
+    -d {{ dns }}
+  args:
+    creates: "{{ certificate_path }}"
+
+- name: create certificate https conf directory
+  file:
+    path: "{{ certificate_mail_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Create certificate renew mail file
+  template:
+    src: templates/certificate_renew_mail.txt.j2
+    dest: "{{ certificate_mail_file }}"
+
+- name: Create renew task with certbot
+  cron:
+    name: "[portfolio] Renouvellement Let's Encrypt avec Certbot (standalone)"
+    job: >
+      certbot renew --quiet
+      --post-hook "{{ certbot_standalone_post_hook_script }}"
+    month: 2
+    user: root
+  tags:
+    - crontab

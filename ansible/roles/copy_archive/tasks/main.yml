@@ -1,0 +1,7 @@
+- name: Copy archive to remote server
+  copy:
+    src: "{{ local_archive_path }}"
+    dest: "{{ project_root_folder }}"
+    owner: root
+    group: root
+    mode: '0644'

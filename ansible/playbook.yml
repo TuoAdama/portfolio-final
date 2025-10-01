@@ -1,0 +1,48 @@
+- name: Init deployment folders
+  hosts: barah
+  roles:
+    - init
+  tags:
+    - init
+
+- name: Build project
+  hosts: localhost
+  roles:
+    - build
+  tags:
+    - build
+
+- name: Archive project build
+  hosts: localhost
+  roles:
+    - archive
+  tags:
+    - archive
+
+- name: Copy archive on server
+  hosts: barah
+  roles:
+    - copy_archive
+  tags:
+    - copy_archive
+
+- name: Unarchive build on server
+  hosts: barah
+  roles:
+    - unarchive
+  tags:
+    - unarchive
+
+- name: Create SSL/TLS certificate
+  hosts: barah
+  roles:
+    - https
+  tags:
+    - https
+
+- name: Setup Nginx configuration
+  hosts: barah
+  roles:
+    - nginx
+  tags:
+    - nginx

@@ -1,0 +1,6 @@
+- name: Archive project
+  archive:
+    path: "{{ folder_to_archive }}/**"
+    dest: "{{ archive_path }}"
+    format: gz
+    force_archive: true

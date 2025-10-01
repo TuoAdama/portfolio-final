@@ -1,0 +1,30 @@
+- name: Create nginx conf
+  copy:
+    src: "{{ nginx_src_conf_path }}"
+    dest: "{{ nginx_dest_conf_path }}"
+
+- name: Create logs folder
+  file:
+    path: "{{ nginx_log_folder }}"
+    state: directory
+
+- name: Enable nginx conf
+  file:
+    state: link
+    src: "{{ nginx_dest_conf_path }}"
+    dest: "{{ nginx_site_enable_conf_path }}"
+
+- name: Test Nginx configuration
+  command: nginx -t
+  register: nginx_test
+  ignore_errors: yes
+
+- name: Show Nginx test result
+  debug:
+    var: nginx_test.stdout_lines
+
+- name: Reload Nginx
+  service:
+    name: nginx
+    state: reloaded
+  when: nginx_test.rc == 0

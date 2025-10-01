@@ -1,0 +1,14 @@
+- name: Create project, release and nginx log folders if is not exists
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - "{{ project_root_folder }}"
+    - "{{ release_folder }}"
+
+- name: Link current project folder to release folder
+  file:
+    src: "{{ release_folder }}"
+    dest: "{{ current_project_folder }}"
+    state: link

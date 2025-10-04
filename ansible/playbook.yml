@@ -26,13 +26,6 @@
   tags:
     - copy_archive
 
-- name: Unarchive build on server
-  hosts: barah
-  roles:
-    - unarchive
-  tags:
-    - unarchive
-
 - name: Create SSL/TLS certificate
   hosts: barah
   roles:
@@ -40,9 +33,23 @@
   tags:
     - https
 
-- name: Setup Nginx configuration
+- name: Deploy application
   hosts: barah
-  roles:
-    - nginx
-  tags:
-    - nginx
+  gather_facts: false
+  tasks:
+    - block:
+        - name: Unarchive build on server
+          import_role:
+            name: unarchive
+          tags: unarchive
+
+        - name: Setup Nginx configuration
+          import_role:
+            name: nginx
+          tags: nginx
+
+      rescue:
+        - name: Rollback to previous release
+          import_role:
+            name: rollback
+          tags: rollback

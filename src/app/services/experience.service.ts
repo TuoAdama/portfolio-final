@@ -32,7 +32,7 @@ export class ExperienceService {
       structureName:"OneMart",
       beginAt: "Juin 2021",
       endAt:"2022",
-      iconUrl: "https://media.licdn.com/dms/image/v2/C4D0BAQFggP8cthzMsg/company-logo_200_200/company-logo_200_200/0/1672473629862/onemart_distributors_logo?e=1734566400&v=beta&t=v6TEQrupuoPgCehgzZLatFhS-vWvyoxpQNvgZsB1QfM"
+      iconUrl: "assets/images/onemart.jpg",
     },
     {
       id: 3,
@@ -42,7 +42,7 @@ export class ExperienceService {
       structureName:"EKip Services",
       beginAt: "2023",
       endAt:"2024",
-      iconUrl: "https://media.licdn.com/dms/image/v2/C4E0BAQF2N1S2LYm81Q/company-logo_200_200/company-logo_200_200/0/1677783941943?e=1734566400&v=beta&t=FrdEYLhhsPzk8VUAB64xTLz9INiJFe9EGk-9bR9HYXM",
+      iconUrl: "assets/images/ekip.png",
     }
   ];
 

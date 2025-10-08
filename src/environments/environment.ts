@@ -1,4 +1,4 @@
 export const environment = {
-  apiUrl: 'https://api-porfolio.tuo-adama.com/api',
+  apiUrl: 'https://api.espace.atuo.fr/api',
   googleAnalyticsId: "G-V3EKLDQL08"
 };

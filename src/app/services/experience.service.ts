@@ -22,7 +22,7 @@ export class ExperienceService {
       structureName:"Orange Business",
       beginAt: "2023",
       endAt:"2024",
-      iconUrl: "https://reseaux.orange-business.com/wp-content/uploads/2022/03/favicon.png",
+      iconUrl: "assets/images/obs.webp",
     },
     {
       id: 2,
@@ -55,7 +55,7 @@ export class ExperienceService {
       structureName:this.UNIV_RENNES,
       beginAt: "2022",
       endAt:"2024",
-      iconUrl: "https://upload.wikimedia.org/wikipedia/fr/thumb/6/6c/Logo_Universit%C3%A9_Rennes_1_.svg/1200px-Logo_Universit%C3%A9_Rennes_1_.svg.png"
+      iconUrl: "assets/images/rennes1.png"
     },
     {
       id: 2,
@@ -65,7 +65,7 @@ export class ExperienceService {
       structureName: this.UNIV_NANGUI,
       beginAt: "2019",
       endAt:"2021",
-      iconUrl: "https://upload.wikimedia.org/wikipedia/fr/1/15/Logotype_Universit%C3%A9_Nangui_Abrogoua.png"
+      iconUrl: "assets/images/una.png"
     },
     {
       id: 3,
@@ -75,7 +75,7 @@ export class ExperienceService {
       structureName:this.UNIV_NANGUI,
       beginAt: "2016",
       endAt:"2019",
-      iconUrl: "https://upload.wikimedia.org/wikipedia/fr/1/15/Logotype_Universit%C3%A9_Nangui_Abrogoua.png"
+      iconUrl: "assets/images/una.png"
     }
   ]
 

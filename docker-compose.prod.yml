@@ -3,6 +3,6 @@ services:
   angular-app:
     build:
       context: .
-      dockerfile: docker/dev/Dockerfile
+      dockerfile: Dockerfile
     environment:
       - NODE_ENV=production

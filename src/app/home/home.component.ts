@@ -4,7 +4,6 @@ import {NavBarComponent} from "../nav-bar/nav-bar.component";
 import {ExperienceItemComponent} from "../experience-item/experience-item.component";
 import {ExperienceSectionComponent} from "../experience-section/experience-section.component";
 import {PresentationComponent} from "../presentation/presentation.component";
-import {ContactComponent} from "../contact/contact.component";
 import {FooterComponent} from "../footer/footer.component";
 import {SilderComponent} from "../silder/silder.component";
 import { SkillSectionComponent } from "../skill-section/skill-section.component";
@@ -22,7 +21,6 @@ import {ParcoursComponent} from "../parcours/parcours.component";
     ExperienceItemComponent,
     ExperienceSectionComponent,
     PresentationComponent,
-    ContactComponent,
     FooterComponent,
     SilderComponent,
     SkillSectionComponent,

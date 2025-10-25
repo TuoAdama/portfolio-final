@@ -1,7 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {LogoComponent} from "../logo/logo.component";
 import {ContactService} from "../services/contact.service";
-import {Contact} from "../../models/Contact";
 
 @Component({
   selector: 'app-footer',

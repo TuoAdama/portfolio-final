@@ -1,0 +1,12 @@
+---
+alwaysApply: true
+description: Describe tools and define code rule
+---
+
+- Your comments must be in english
+- Always use Tailwind for styling
+- To execute npm command use this command:
+```sh
+docker compose exec angular-app npm ....
+```
+

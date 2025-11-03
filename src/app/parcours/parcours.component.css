@@ -267,7 +267,7 @@ section {
   border-radius: calc(var(--card-border-radius) / 2);
   transition: all 0.3s ease;
   margin-top: 0.5rem;
-  background: white;
+  background: var(--ui-bg);
   border: 1px solid var(--ui-light-border-color);
 }
 

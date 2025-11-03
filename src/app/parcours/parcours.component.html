@@ -16,8 +16,8 @@
             <span class="timeline-card-badge timeline-card-badge--experience">
               Expériences
             </span>
-            <h3 class="timeline-card-title">Mes contributions en entreprise</h3>
-            <p class="timeline-card-description">
+            <h3 class="timeline-card-title text-gray-950 dark:text-white">Mes contributions en entreprise</h3>
+            <p class="timeline-card-description text-gray-700 dark:text-gray-300">
               Projets menés en France et en Côte d'Ivoire, du développement fullstack à l'architecture logicielle.
             </p>
           </div>
@@ -39,19 +39,19 @@
                     </div>
                   </div>
                   
-                  <div class="timeline-content timeline-content--experience">
+                  <div class="timeline-content timeline-content--experience bg-white dark:bg-[--card-dark-bg] border border-[--ui-light-border-color] dark:border-[--ui-dark-border-color]">
                     <div class="timeline-header">
-                      <span class="timeline-period">
+                      <span class="timeline-period text-gray-500 dark:text-gray-400">
                         @if (item.beginAt === item.endAt) {
                           {{ item.beginAt }}
                         } @else {
                           {{ item.beginAt }} - {{ item.endAt }}
                         }
                       </span>
-                      <h4 class="timeline-title">{{ item.name }}</h4>
+                      <h4 class="timeline-title text-gray-950 dark:text-white">{{ item.name }}</h4>
                     </div>
                     
-                    <div class="timeline-details">
+                    <div class="timeline-details text-gray-700 dark:text-gray-300">
                       @if (item.structureName) {
                         <p class="timeline-structure">
                           {{ item.structureName }}
@@ -78,8 +78,8 @@
             <span class="timeline-card-badge timeline-card-badge--formation">
               Formations
             </span>
-            <h3 class="timeline-card-title">Construire une base solide</h3>
-            <p class="timeline-card-description">
+            <h3 class="timeline-card-title text-gray-950 dark:text-white">Construire une base solide</h3>
+            <p class="timeline-card-description text-gray-700 dark:text-gray-300">
               De la licence en Côte d'Ivoire au master MIAGE en France, un parcours orienté systèmes d'information.
             </p>
           </div>
@@ -101,19 +101,19 @@
                     </div>
                   </div>
                   
-                  <div class="timeline-content timeline-content--formation">
+                  <div class="timeline-content timeline-content--formation bg-white dark:bg-[--card-dark-bg] border border-[--ui-light-border-color] dark:border-[--ui-dark-border-color]">
                     <div class="timeline-header">
-                      <span class="timeline-period">
+                      <span class="timeline-period text-gray-500 dark:text-gray-400">
                         @if (item.beginAt === item.endAt) {
                           {{ item.beginAt }}
                         } @else {
                           {{ item.beginAt }} - {{ item.endAt }}
                         }
                       </span>
-                      <h4 class="timeline-title">{{ item.name }}</h4>
+                      <h4 class="timeline-title text-gray-950 dark:text-white">{{ item.name }}</h4>
                     </div>
                     
-                    <div class="timeline-details">
+                    <div class="timeline-details text-gray-700 dark:text-gray-300">
                       @if (item.structureName) {
                         <p class="timeline-structure">
                           {{ item.structureName }}

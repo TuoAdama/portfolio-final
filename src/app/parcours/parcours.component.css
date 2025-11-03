@@ -68,23 +68,13 @@ section {
 .timeline-card-title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: rgb(2, 3, 4);
   margin: 0;
-}
-
-:host-context(.dark) .timeline-card-title {
-  color: white;
 }
 
 .timeline-card-description {
   font-size: 0.875rem;
   line-height: 1.6;
-  color: rgb(51, 65, 85);
   margin: 0;
-}
-
-:host-context(.dark) .timeline-card-description {
-  color: rgb(203, 213, 225);
 }
 
 .timeline-container {
@@ -332,23 +322,13 @@ section {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgb(100, 116, 139);
-}
-
-:host-context(.dark) .timeline-period {
-  color: rgb(148, 163, 184);
 }
 
 .timeline-title {
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 1.4;
-  color: rgb(2, 3, 4);
   margin: 0;
-}
-
-:host-context(.dark) .timeline-title {
-  color: white;
 }
 
 /* Détails */
@@ -361,28 +341,14 @@ section {
 .timeline-structure {
   font-size: 0.95rem;
   font-weight: 600;
-  color: rgb(51, 65, 85);
   margin: 0;
-}
-
-:host-context(.dark) .timeline-structure {
-  color: rgb(203, 213, 225);
 }
 
 .timeline-location {
   display: flex;
   align-items: center;
   font-size: 0.875rem;
-  color: rgb(100, 116, 139);
   margin: 0;
-}
-
-:host-context(.dark) .timeline-location {
-  color: rgb(148, 163, 184);
-}
-
-.timeline-icon {
-  flex-shrink: 0;
 }
 
 /* Responsive */

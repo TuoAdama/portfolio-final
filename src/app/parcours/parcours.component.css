@@ -7,8 +7,6 @@ section {
   position: relative;
   overflow: hidden;
   border-radius: var(--card-border-radius, 1.5rem);
-  border: 1px solid var(--ui-light-border-color);
-  background: white;
   padding: var(--card-padding, 2rem);
   display: flex;
   flex-direction: column;
@@ -17,12 +15,15 @@ section {
 }
 
 :host-context(.dark) .timeline-card {
-  background: var(--card-dark-bg);
-  border-color: var(--ui-dark-border-color);
+  /* Dark mode styles are now handled by Tailwind classes in HTML */
 }
 
 .timeline-card:hover {
-  box-shadow: var(--card-shadow, 0 4px 6px -1px rgb(2 3 4 / 4%), 0 2px 4px -2px rgb(2 3 4 / 4%));
+  box-shadow: var(--card-shadow);
+}
+
+:host-context(.dark) .timeline-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 /* Header de la card */
@@ -182,22 +183,22 @@ section {
   display: grid;
   place-items: center;
   border: 2px solid;
-  box-shadow: 0 0 0 4px rgba(255, 255, 255, 1);
+  box-shadow: 0 0 0 4px white;
   z-index: 1;
   transition: all 0.3s ease;
 }
 
 :host-context(.dark) .timeline-marker {
-  box-shadow: 0 0 0 4px rgba(15, 23, 42, 1);
+  box-shadow: 0 0 0 4px var(--card-dark-bg);
 }
 
 .timeline-marker:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.9), 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 0 6px white, 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 :host-context(.dark) .timeline-marker:hover {
-  box-shadow: 0 0 0 6px rgba(15, 23, 42, 0.95), 0 4px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 6px var(--card-dark-bg), 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 /* Marker pour expériences */
@@ -208,7 +209,7 @@ section {
 
 :host-context(.dark) .timeline-marker--experience {
   border-color: rgb(251, 146, 60);
-  background: linear-gradient(135deg, rgba(251, 146, 60, 0.3), rgba(234, 88, 12, 0.2));
+  background: linear-gradient(135deg, rgba(251, 146, 60, 0.4), rgba(234, 88, 12, 0.3));
 }
 
 /* Marker pour formations */
@@ -219,7 +220,7 @@ section {
 
 :host-context(.dark) .timeline-marker--formation {
   border-color: rgb(56, 189, 248);
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.3), rgba(14, 165, 233, 0.2));
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), rgba(14, 165, 233, 0.3));
 }
 
 .timeline-logo {
@@ -232,12 +233,12 @@ section {
 .timeline-fallback {
   font-weight: 700;
   font-size: 1.1rem;
-  color: #0f172a;
+  color: rgb(2, 3, 4);
   text-transform: uppercase;
 }
 
 :host-context(.dark) .timeline-fallback {
-  color: #f8fafc;
+  color: white;
 }
 
 /* Badge sur le marker */
@@ -255,7 +256,8 @@ section {
 }
 
 :host-context(.dark) .timeline-marker-badge {
-  border-color: rgb(15, 23, 42);
+  border-color: var(--card-dark-bg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .timeline-marker-badge--experience {
@@ -273,10 +275,10 @@ section {
   flex: 1;
   padding: 1.25rem 1.5rem;
   border-radius: calc(var(--card-border-radius) / 2);
-  border: 1px solid var(--ui-light-border-color);
-  background: white;
   transition: all 0.3s ease;
   margin-top: 0.5rem;
+  background: white;
+  border: 1px solid var(--ui-light-border-color);
 }
 
 :host-context(.dark) .timeline-content {
@@ -286,12 +288,12 @@ section {
 
 .timeline-content:hover {
   transform: translateX(0.25rem);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow);
   border-color: var(--ui-light-border-hover-color);
 }
 
 :host-context(.dark) .timeline-content:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   border-color: var(--ui-dark-border-hover-color);
 }
 

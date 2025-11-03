@@ -1,22 +1,138 @@
 <section>
   <div class="pt-5 md:pt-28">
-    <div class="mx-auto px-6 max-w-6xl text-gray-500">
-      <div class="text-center my-12">
-        <h2 class="text-3xl text-gray-950 dark:text-white font-semibold">Parcours</h2>
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="my-12 space-y-3 text-center">
+        <p class="text-xs font-semibold uppercase tracking-[0.35em] text-sky-600 dark:text-sky-300">Timeline</p>
+        <h2 class="text-3xl font-semibold text-gray-950 dark:text-white">Parcours</h2>
+        <p class="mx-auto max-w-xl text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+          Un aperçu chronologique de mon parcours professionnel et académique, du plus récent au plus ancien.
+        </p>
       </div>
-      <div class="relative">
-        <div class="relative z-10 grid gap-3 grid-cols-6">
-          <div class="col-span-full lg:col-span-3 overflow-hidden relative p-[--card-padding] rounded-[--card-border-radius] bg-white border border-[--ui-light-border-color] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-            <app-experience-item name="Expériences" [experience]="experiences">
-              <p description>Mes expériences professionnelles de 2019 à 2024</p>
-            </app-experience-item>
+
+      <div class="grid gap-6 lg:grid-cols-2 lg:items-start">
+        <!-- Card Expériences -->
+        <article class="timeline-card timeline-card--experience bg-white dark:bg-[--card-dark-bg] border border-[--ui-light-border-color] dark:border-[--ui-dark-border-color]">
+          <div class="timeline-card-header timeline-card-header--experience">
+            <span class="timeline-card-badge timeline-card-badge--experience">
+              Expériences
+            </span>
+            <h3 class="timeline-card-title text-gray-950 dark:text-white">Mes contributions en entreprise</h3>
+            <p class="timeline-card-description text-gray-700 dark:text-gray-300">
+              Projets menés en France et en Côte d'Ivoire, du développement fullstack à l'architecture logicielle.
+            </p>
           </div>
-          <div class="col-span-full lg:col-span-3 overflow-hidden relative p-[--card-padding] rounded-[--card-border-radius] bg-white border border-[--ui-light-border-color] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-            <app-experience-item name="Formations" [experience]="formations">
-              <p description>Mon parcours académique de 2016 à 2024.</p>
-            </app-experience-item>
+          <div class="timeline-container">
+            <div class="timeline">
+              @for (item of experiences; track item.id) {
+                <div class="timeline-item timeline-item--experience">
+                  <div class="timeline-marker timeline-marker--experience">
+                    @if (item.iconUrl) {
+                      <img class="timeline-logo" [src]="item.iconUrl" [alt]="item.structureName ?? item.name">
+                    } @else {
+                      <span class="timeline-fallback">{{ item.name?.slice(0, 1) }}</span>
+                    }
+                    <div class="timeline-marker-badge timeline-marker-badge--experience">
+                      <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                        <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/>
+                      </svg>
+                    </div>
+                  </div>
+                  
+                  <div class="timeline-content timeline-content--experience bg-white dark:bg-[--card-dark-bg] border border-[--ui-light-border-color] dark:border-[--ui-dark-border-color]">
+                    <div class="timeline-header">
+                      <span class="timeline-period text-gray-500 dark:text-gray-400">
+                        @if (item.beginAt === item.endAt) {
+                          {{ item.beginAt }}
+                        } @else {
+                          {{ item.beginAt }} - {{ item.endAt }}
+                        }
+                      </span>
+                      <h4 class="timeline-title text-gray-950 dark:text-white">{{ item.name }}</h4>
+                    </div>
+                    
+                    <div class="timeline-details text-gray-700 dark:text-gray-300">
+                      @if (item.structureName) {
+                        <p class="timeline-structure">
+                          {{ item.structureName }}
+                        </p>
+                      }
+                      <p class="timeline-location">
+                        <svg class="timeline-icon inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        {{ item.city }}, {{ item.country }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
           </div>
-        </div>
+        </article>
+
+        <!-- Card Formations -->
+        <article class="timeline-card timeline-card--formation bg-white dark:bg-[--card-dark-bg] border border-[--ui-light-border-color] dark:border-[--ui-dark-border-color]">
+          <div class="timeline-card-header timeline-card-header--formation">
+            <span class="timeline-card-badge timeline-card-badge--formation">
+              Formations
+            </span>
+            <h3 class="timeline-card-title text-gray-950 dark:text-white">Construire une base solide</h3>
+            <p class="timeline-card-description text-gray-700 dark:text-gray-300">
+              De la licence en Côte d'Ivoire au master MIAGE en France, un parcours orienté systèmes d'information.
+            </p>
+          </div>
+          <div class="timeline-container">
+            <div class="timeline">
+              @for (item of formations; track item.id) {
+                <div class="timeline-item timeline-item--formation">
+                  <div class="timeline-marker timeline-marker--formation">
+                    @if (item.iconUrl) {
+                      <img class="timeline-logo" [src]="item.iconUrl" [alt]="item.structureName ?? item.name">
+                    } @else {
+                      <span class="timeline-fallback">{{ item.name?.slice(0, 1) }}</span>
+                    }
+                    <div class="timeline-marker-badge timeline-marker-badge--formation">
+                      <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z"/>
+                        <path d="M3.31 9.272L9 11.105v4.158a1 1 0 01-.356.257l-4 1.714a1 1 0 01-1.338-.86l-.985-7a1 1 0 01.679-.95zm12.638 0a1 1 0 01.68.95l.984 7a1 1 0 01-1.338.86l-4-1.714a1 1 0 01-.356-.257V11.1l5.662-1.828a1 1 0 01.68-.95z"/>
+                      </svg>
+                    </div>
+                  </div>
+                  
+                  <div class="timeline-content timeline-content--formation bg-white dark:bg-[--card-dark-bg] border border-[--ui-light-border-color] dark:border-[--ui-dark-border-color]">
+                    <div class="timeline-header">
+                      <span class="timeline-period text-gray-500 dark:text-gray-400">
+                        @if (item.beginAt === item.endAt) {
+                          {{ item.beginAt }}
+                        } @else {
+                          {{ item.beginAt }} - {{ item.endAt }}
+                        }
+                      </span>
+                      <h4 class="timeline-title text-gray-950 dark:text-white">{{ item.name }}</h4>
+                    </div>
+                    
+                    <div class="timeline-details text-gray-700 dark:text-gray-300">
+                      @if (item.structureName) {
+                        <p class="timeline-structure">
+                          {{ item.structureName }}
+                        </p>
+                      }
+                      <p class="timeline-location">
+                        <svg class="timeline-icon inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        {{ item.city }}, {{ item.country }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </div>

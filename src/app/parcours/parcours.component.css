@@ -1,0 +1,397 @@
+section {
+  width: 100%;
+}
+
+/* Card principale */
+.timeline-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--card-border-radius, 1.5rem);
+  padding: var(--card-padding, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  transition: all 0.3s ease;
+}
+
+:host-context(.dark) .timeline-card {
+  /* Dark mode styles are now handled by Tailwind classes in HTML */
+}
+
+.timeline-card:hover {
+  box-shadow: var(--card-shadow);
+}
+
+:host-context(.dark) .timeline-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Header de la card */
+.timeline-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.timeline-card-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.375rem 0.875rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.timeline-card-badge--experience {
+  background: rgba(234, 88, 12, 0.1);
+  color: rgb(234, 88, 12);
+}
+
+:host-context(.dark) .timeline-card-badge--experience {
+  background: rgba(251, 146, 60, 0.2);
+  color: rgb(251, 146, 60);
+}
+
+.timeline-card-badge--formation {
+  background: rgba(14, 165, 233, 0.1);
+  color: rgb(14, 165, 233);
+}
+
+:host-context(.dark) .timeline-card-badge--formation {
+  background: rgba(56, 189, 248, 0.2);
+  color: rgb(56, 189, 248);
+}
+
+.timeline-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.timeline-card-description {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.timeline-container {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding-left: 3rem;
+}
+
+/* Ligne verticale de la timeline */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 1.25rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    rgba(14, 165, 233, 0.2) 0%,
+    rgba(59, 130, 246, 0.3) 50%,
+    rgba(14, 165, 233, 0.2) 100%
+  );
+  border-radius: 2px;
+}
+
+:host-context(.dark) .timeline::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(56, 189, 248, 0.3) 0%,
+    rgba(59, 130, 246, 0.4) 50%,
+    rgba(56, 189, 248, 0.3) 100%
+  );
+}
+
+/* Ligne verticale pour les expériences (orange) */
+.timeline-card--experience .timeline::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(234, 88, 12, 0.2) 0%,
+    rgba(251, 146, 60, 0.3) 50%,
+    rgba(234, 88, 12, 0.2) 100%
+  );
+}
+
+:host-context(.dark) .timeline-card--experience .timeline::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(251, 146, 60, 0.3) 0%,
+    rgba(251, 146, 60, 0.4) 50%,
+    rgba(251, 146, 60, 0.3) 100%
+  );
+}
+
+/* Ligne verticale pour les formations (bleu) */
+.timeline-card--formation .timeline::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(14, 165, 233, 0.2) 0%,
+    rgba(59, 130, 246, 0.3) 50%,
+    rgba(14, 165, 233, 0.2) 100%
+  );
+}
+
+:host-context(.dark) .timeline-card--formation .timeline::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(56, 189, 248, 0.3) 0%,
+    rgba(59, 130, 246, 0.4) 50%,
+    rgba(56, 189, 248, 0.3) 100%
+  );
+}
+
+/* Item de timeline */
+.timeline-item {
+  position: relative;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+/* Marker de timeline */
+.timeline-marker {
+  position: relative;
+  flex-shrink: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  border: 2px solid;
+  box-shadow: 0 0 0 4px white;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+:host-context(.dark) .timeline-marker {
+  box-shadow: 0 0 0 4px var(--card-dark-bg);
+}
+
+.timeline-marker:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 6px white, 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+:host-context(.dark) .timeline-marker:hover {
+  box-shadow: 0 0 0 6px var(--card-dark-bg), 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Marker pour expériences */
+.timeline-marker--experience {
+  border-color: rgb(234, 88, 12);
+  background: linear-gradient(135deg, rgba(251, 146, 60, 0.2), rgba(234, 88, 12, 0.1));
+}
+
+:host-context(.dark) .timeline-marker--experience {
+  border-color: rgb(251, 146, 60);
+  background: linear-gradient(135deg, rgba(251, 146, 60, 0.4), rgba(234, 88, 12, 0.3));
+}
+
+/* Marker pour formations */
+.timeline-marker--formation {
+  border-color: rgb(14, 165, 233);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(14, 165, 233, 0.1));
+}
+
+:host-context(.dark) .timeline-marker--formation {
+  border-color: rgb(56, 189, 248);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), rgba(14, 165, 233, 0.3));
+}
+
+.timeline-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.timeline-fallback {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: rgb(2, 3, 4);
+  text-transform: uppercase;
+}
+
+:host-context(.dark) .timeline-fallback {
+  color: white;
+}
+
+/* Badge sur le marker */
+.timeline-marker-badge {
+  position: absolute;
+  top: -0.25rem;
+  right: -0.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+:host-context(.dark) .timeline-marker-badge {
+  border-color: var(--card-dark-bg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.timeline-marker-badge--experience {
+  background: rgb(234, 88, 12);
+  color: white;
+}
+
+.timeline-marker-badge--formation {
+  background: rgb(14, 165, 233);
+  color: white;
+}
+
+/* Contenu de timeline */
+.timeline-content {
+  flex: 1;
+  padding: 1.25rem 1.5rem;
+  border-radius: calc(var(--card-border-radius) / 2);
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-light-border-color);
+}
+
+:host-context(.dark) .timeline-content {
+  background: var(--card-dark-bg);
+  border-color: var(--ui-dark-border-color);
+}
+
+.timeline-content:hover {
+  transform: translateX(0.25rem);
+  box-shadow: var(--card-shadow);
+  border-color: var(--ui-light-border-hover-color);
+}
+
+:host-context(.dark) .timeline-content:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border-color: var(--ui-dark-border-hover-color);
+}
+
+/* Bordure et style selon le type */
+.timeline-content--experience {
+  border-color: rgba(234, 88, 12, 0.2);
+  border-left: 3px solid rgb(234, 88, 12);
+}
+
+:host-context(.dark) .timeline-content--experience {
+  border-color: rgba(251, 146, 60, 0.3);
+  border-left-color: rgb(251, 146, 60);
+}
+
+.timeline-content--formation {
+  border-color: rgba(14, 165, 233, 0.2);
+  border-left: 3px solid rgb(14, 165, 233);
+}
+
+:host-context(.dark) .timeline-content--formation {
+  border-color: rgba(56, 189, 248, 0.3);
+  border-left-color: rgb(56, 189, 248);
+}
+
+
+/* Header */
+.timeline-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.timeline-period {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.timeline-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Détails */
+.timeline-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.timeline-structure {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.timeline-location {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .timeline {
+    padding-left: 2.5rem;
+    gap: 2rem;
+  }
+
+  .timeline::before {
+    left: 1rem;
+  }
+
+  .timeline-marker {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .timeline-content {
+    padding: 1rem 1.25rem;
+  }
+
+  .timeline-title {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .timeline {
+    padding-left: 2rem;
+    gap: 1.75rem;
+  }
+
+  .timeline::before {
+    left: 0.875rem;
+  }
+
+  .timeline-marker {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .timeline-item {
+    gap: 1rem;
+  }
+}

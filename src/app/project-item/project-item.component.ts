@@ -10,4 +10,8 @@ import {Component, Input} from '@angular/core';
 export class ProjectItemComponent {
   @Input({required: true})
   name!: string;
+
+  @Input({required: false})
+  link: string = "#"
+
 }

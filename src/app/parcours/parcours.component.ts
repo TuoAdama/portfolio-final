@@ -1,7 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ExperienceService} from "../services/experience.service";
-import {Experience} from "../../models/Experience";
-import {Formation} from "../../models/Formation";
 
 interface TimelineItem {
   id: number;

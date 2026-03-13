@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Fond clair -->
+  <rect width="100" height="100" rx="18" fill="#F1EFE8"/>
+  <!-- {At} centré -->
+  <text
+    x="50" y="50"
+    font-family="'Courier New', Courier, monospace"
+    font-size="38"
+    font-weight="700"
+    fill="#185FA5"
+    text-anchor="middle"
+    dominant-baseline="central">{At}</text>
+  <!-- Soulignement sous le t -->
+  <!-- "{At}" ~90px large à 38px. } occupe ~18px à droite, t ~18px avant }. Centre du t ≈ x=59 -->
+  <rect x="50" y="65" width="14" height="3" rx="1.5" fill="#185FA5"/>
+</svg>

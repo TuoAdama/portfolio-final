@@ -1,6 +1,33 @@
-version: '3.9'
+name: portfolio-${DEPLOY_ENV}
+
 services:
-  angular-app:
-    build:
-      context: .
-      dockerfile: docker/prod/Dockerfile
+  portfolio:
+    image: ${PORTFOLIO_IMAGE}
+    restart: unless-stopped
+    pull_policy: always
+    healthcheck:
+      test: ["CMD-SHELL", "wget --quiet --spider http://127.0.0.1/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      start_period: 10s
+      retries: 6
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=dokploy-network"
+      - "traefik.http.routers.portfolio-${DEPLOY_ENV}-http.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.portfolio-${DEPLOY_ENV}-http.entrypoints=web"
+      - "traefik.http.routers.portfolio-${DEPLOY_ENV}-http.middlewares=portfolio-${DEPLOY_ENV}-redirect"
+      - "traefik.http.middlewares.portfolio-${DEPLOY_ENV}-redirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.portfolio-${DEPLOY_ENV}-redirect.redirectscheme.permanent=true"
+      - "traefik.http.routers.portfolio-${DEPLOY_ENV}-https.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.portfolio-${DEPLOY_ENV}-https.entrypoints=websecure"
+      - "traefik.http.routers.portfolio-${DEPLOY_ENV}-https.tls=true"
+      - "traefik.http.routers.portfolio-${DEPLOY_ENV}-https.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.portfolio-${DEPLOY_ENV}-https.service=portfolio-${DEPLOY_ENV}"
+      - "traefik.http.services.portfolio-${DEPLOY_ENV}.loadbalancer.server.port=80"
+    networks:
+      - dokploy-network
+
+networks:
+  dokploy-network:
+    external: true

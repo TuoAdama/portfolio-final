@@ -1,0 +1,135 @@
+name: Deploy portfolio
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  deploy:
+    name: Deploy ${{ github.event.action == 'closed' && 'production' || 'preproduction' }}
+    if: >-
+      github.event.pull_request.head.ref == 'preprod' &&
+      (
+        contains(fromJSON('["opened", "reopened", "synchronize"]'), github.event.action) ||
+        (github.event.action == 'closed' && github.event.pull_request.merged == true)
+      )
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    environment:
+      name: ${{ github.event.action == 'closed' && 'prod' || 'preprod' }}
+      url: ${{ github.event.action == 'closed' && 'https://atuo.fr' || 'https://preprod.atuo.fr' }}
+    concurrency:
+      group: portfolio-${{ github.event.action == 'closed' && 'prod' || 'preprod' }}
+      cancel-in-progress: ${{ github.event.action != 'closed' }}
+    env:
+      DEPLOY_ENV: ${{ github.event.action == 'closed' && 'prod' || 'preprod' }}
+      DEPLOY_DOMAIN: ${{ github.event.action == 'closed' && 'atuo.fr' || 'preprod.atuo.fr' }}
+      DEPLOY_DIRECTORY: ${{ github.event.action == 'closed' && '/root/portfolio/prod' || '/root/portfolio/preprod' }}
+      DEPLOY_SHA: ${{ github.event.action == 'closed' && github.event.pull_request.merge_commit_sha || github.event.pull_request.head.sha }}
+      REGISTRY: ghcr.io
+      IMAGE_NAME: tuoadama/portfolio-final
+
+    steps:
+      - name: Checkout deployed revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.DEPLOY_SHA }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm test -- --watch=false --browsers=ChromeHeadless
+
+      - name: Validate deployment configuration
+        env:
+          PORTFOLIO_IMAGE: ghcr.io/tuoadama/portfolio-final:${{ env.DEPLOY_ENV }}-${{ env.DEPLOY_SHA }}
+          DOMAIN: ${{ env.DEPLOY_DOMAIN }}
+        run: docker compose -f docker-compose.prod.yml config --quiet
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and publish immutable image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/prod/Dockerfile
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DEPLOY_ENV }}-${{ env.DEPLOY_SHA }}
+          labels: |
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.revision=${{ env.DEPLOY_SHA }}
+          cache-from: type=gha,scope=portfolio
+          cache-to: type=gha,mode=max,scope=portfolio
+
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SERVER_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d "$HOME/.ssh"
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$HOME/.ssh/portfolio_deploy_key"
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/portfolio_deploy_key" "$HOME/.ssh/known_hosts"
+
+      - name: Copy deployment files
+        env:
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_PORT: ${{ secrets.SERVER_PORT }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+        run: |
+          case "$SERVER_PORT" in
+            ''|*[!0-9]*) echo "SERVER_PORT must be numeric" >&2; exit 1 ;;
+          esac
+
+          ssh -i "$HOME/.ssh/portfolio_deploy_key" -p "$SERVER_PORT" \
+            "$SERVER_USER@$SERVER_HOST" "mkdir -p '$DEPLOY_DIRECTORY'"
+
+          scp -i "$HOME/.ssh/portfolio_deploy_key" -P "$SERVER_PORT" \
+            docker-compose.prod.yml \
+            "$SERVER_USER@$SERVER_HOST:$DEPLOY_DIRECTORY/docker-compose.yml"
+
+          scp -i "$HOME/.ssh/portfolio_deploy_key" -P "$SERVER_PORT" \
+            scripts/deploy.sh \
+            "$SERVER_USER@$SERVER_HOST:$DEPLOY_DIRECTORY/deploy.sh"
+
+      - name: Deploy and verify
+        env:
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_PORT: ${{ secrets.SERVER_PORT }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+        run: |
+          image="$REGISTRY/$IMAGE_NAME:$DEPLOY_ENV-$DEPLOY_SHA"
+          health_url="https://$DEPLOY_DOMAIN/health"
+
+          ssh -i "$HOME/.ssh/portfolio_deploy_key" -p "$SERVER_PORT" \
+            "$SERVER_USER@$SERVER_HOST" \
+            "chmod 700 '$DEPLOY_DIRECTORY/deploy.sh' && '$DEPLOY_DIRECTORY/deploy.sh' '$DEPLOY_ENV' '$DEPLOY_DIRECTORY' '$image' '$DEPLOY_DOMAIN' '$health_url'"
+
+      - name: Remove temporary SSH credentials
+        if: always()
+        run: rm -f "$HOME/.ssh/portfolio_deploy_key"

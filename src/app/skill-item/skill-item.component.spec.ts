@@ -14,6 +14,11 @@ describe('SkillItemComponent', () => {
 
     fixture = TestBed.createComponent(SkillItemComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('skill', {
+      name: 'Angular',
+      imageUrl: '/assets/images/icons/framework-icon.png',
+      tools: 'TypeScript',
+    });
     fixture.detectChanges();
   });
 

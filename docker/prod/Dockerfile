@@ -1,18 +1,22 @@
-FROM node:24 AS build
+FROM node:22-alpine AS build
 WORKDIR /app
 
-COPY ../../package*.json ./
+COPY package*.json ./
 
-RUN npm install
+RUN npm ci
 
-COPY ../.. .
+COPY . .
 
-RUN npm run build --prod
+RUN npm run build:prod
 
-# Étape 2 : Serveur Nginx
 FROM nginx:alpine
-# Copie les fichiers buildés (HTML, JS, CSS)
+
+COPY nginx/conf/nginx.prod.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist/portfolio/browser /usr/share/nginx/html
 
 EXPOSE 80
+
+HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=6 \
+  CMD wget --quiet --spider http://127.0.0.1/ || exit 1
+
 CMD ["nginx", "-g", "daemon off;"]

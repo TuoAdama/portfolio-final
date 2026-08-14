@@ -52,6 +52,11 @@ GitHub Actions publishes immutable images to
 - merging that exact pull request deploys to `https://atuo.fr`;
 - direct pushes to `main` and pull requests from other branches never deploy.
 
+The preproduction workflow builds the image once as `preprod-<commit-sha>`.
+After the pull request is merged, the workflow promotes that exact registry
+manifest to `prod-<commit-sha>` without rebuilding it. Both tags therefore
+reference the same immutable image digest.
+
 Create the GitHub environments `preprod` and `prod`, then configure these
 repository or environment secrets:
 
@@ -75,4 +80,3 @@ The deployment state is stored separately in `/root/portfolio/preprod` and
 deployed image references. A failed health check automatically restores the
 previous image; a failed first deployment is stopped because no rollback image
 exists yet.
-

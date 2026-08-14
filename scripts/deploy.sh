@@ -65,7 +65,7 @@ case "$new_image" in
 esac
 
 # Strip the image prefix to isolate and validate the revision supplied by GitHub.
-# DEPLOY_SHA is always a full Git SHA, so it must contain 40 hexadecimal characters.
+# IMAGE_SHA is always a full Git SHA, so it must contain 40 hexadecimal characters.
 image_revision=${new_image#ghcr.io/tuoadama/portfolio-final:"$deploy_environment"-}
 if ! printf '%s\n' "$image_revision" | grep -Eq '^[0-9a-f]{40}$'; then
   echo "Image tag must end with the 40-character Git commit SHA: $new_image" >&2

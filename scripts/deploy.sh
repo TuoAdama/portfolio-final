@@ -1,8 +1,11 @@
 #!/bin/sh
 
+# Exit immediately on errors (-e) or references to undefined variables (-u).
 set -eu
 
-# Le workflow doit fournir exactement les cinq paramètres nécessaires au déploiement.
+# --- Read arguments ---------------------------------------------------------
+
+# The workflow must provide exactly the five arguments required for deployment.
 if [ "$#" -ne 5 ]; then
   echo "Usage: $0 <environment> <deployment-directory> <image> <domain> <health-url>" >&2
   exit 64
@@ -14,16 +17,45 @@ new_image=$3
 domain=$4
 health_url=$5
 
-# Restreint les valeurs acceptées afin d'éviter de déployer dans un environnement inattendu.
+# --- Validate the deployment target ----------------------------------------
+
+# Mirror the matrix defined in deploy.yml to prevent mismatches between the
+# environment, deployment directory, domain, and health-check URL.
 case "$deploy_environment" in
-  preprod|prod) ;;
+  preprod)
+    expected_deployment_directory=/root/portfolio/preprod
+    expected_domain=preprod.atuo.fr
+    ;;
+  prod)
+    expected_deployment_directory=/root/portfolio/prod
+    expected_domain=atuo.fr
+    ;;
   *)
     echo "Unsupported deployment environment: $deploy_environment" >&2
     exit 64
     ;;
 esac
 
-# Accepte uniquement les images immuables publiées par ce projet pour l'environnement ciblé.
+expected_health_url="https://$expected_domain/health"
+
+# These checks prevent, for example, a production deployment from targeting the
+# preproduction directory or a health check from querying the wrong application.
+if [ "$deployment_directory" != "$expected_deployment_directory" ]; then
+  echo "Unexpected deployment directory for $deploy_environment: $deployment_directory" >&2
+  exit 64
+fi
+
+if [ "$domain" != "$expected_domain" ]; then
+  echo "Unexpected deployment domain for $deploy_environment: $domain" >&2
+  exit 64
+fi
+
+if [ "$health_url" != "$expected_health_url" ]; then
+  echo "Unexpected health URL for $deploy_environment: $health_url" >&2
+  exit 64
+fi
+
+# Only accept immutable images published by this project for the target environment.
 case "$new_image" in
   ghcr.io/tuoadama/portfolio-final:"$deploy_environment"-*) ;;
   *)
@@ -32,20 +64,23 @@ case "$new_image" in
     ;;
 esac
 
-# Empêche qu'une erreur de configuration redirige le healthcheck vers un autre domaine.
-case "$domain" in
-  atuo.fr|preprod.atuo.fr) ;;
-  *)
-    echo "Unexpected deployment domain: $domain" >&2
-    exit 64
-    ;;
-esac
+# Strip the image prefix to isolate and validate the revision supplied by GitHub.
+# DEPLOY_SHA is always a full Git SHA, so it must contain 40 hexadecimal characters.
+image_revision=${new_image#ghcr.io/tuoadama/portfolio-final:"$deploy_environment"-}
+if ! printf '%s\n' "$image_revision" | grep -Eq '^[0-9a-f]{40}$'; then
+  echo "Image tag must end with the 40-character Git commit SHA: $new_image" >&2
+  exit 64
+fi
 
+# --- Prepare local state ----------------------------------------------------
+
+# All persistent files remain scoped to their environment through the validated
+# directory above (/root/portfolio/prod or /root/portfolio/preprod).
 compose_file="$deployment_directory/docker-compose.yml"
 environment_file="$deployment_directory/.env"
 history_file="$deployment_directory/.deployed-images"
 
-# Le fichier Compose est copié sur le serveur par GitHub Actions avant l'appel du script.
+# GitHub Actions copies the Compose file to the server before invoking this script.
 if [ ! -f "$compose_file" ]; then
   echo "Compose file not found: $compose_file" >&2
   exit 66
@@ -55,12 +90,13 @@ mkdir -p "$deployment_directory"
 cd "$deployment_directory"
 
 previous_image=""
-# L'image actuellement déclarée sert de cible au rollback si le nouveau déploiement échoue.
+# The currently configured image becomes the rollback target if deployment fails.
+# An empty value means this is the environment's first deployment.
 if [ -f "$environment_file" ]; then
   previous_image=$(sed -n 's/^PORTFOLIO_IMAGE=//p' "$environment_file" | head -n 1)
 fi
 
-# Écrit le fichier .env de manière atomique pour que Compose ne lise jamais un fichier partiel.
+# Write .env atomically so Compose never reads a partially written file.
 write_environment_file() {
   selected_image=$1
   temporary_environment_file="$environment_file.tmp.$$"
@@ -75,44 +111,51 @@ write_environment_file() {
   mv "$temporary_environment_file" "$environment_file"
 }
 
-# Centralise l'appel à Compose avec le bon fichier d'environnement et le bon projet.
+# Run Compose consistently with the correct environment and Compose files.
 compose() {
   docker compose --env-file "$environment_file" -f "$compose_file" "$@"
 }
 
-# Restaure l'image précédente, ou arrête le premier déploiement lorsqu'aucun rollback n'existe.
+# --- Deploy and roll back ---------------------------------------------------
+
+# Restore the previous image, or stop the first deployment if no rollback exists.
 rollback() {
   echo "Deployment failed; restoring the previous image." >&2
 
   if [ -n "$previous_image" ] && [ "$previous_image" != "$new_image" ]; then
+    # Normal case: redeploy the known previous image and wait until it is healthy.
     write_environment_file "$previous_image"
     compose pull
     compose up -d --remove-orphans --wait --wait-timeout 120
     echo "Rollback completed with $previous_image." >&2
   elif [ -z "$previous_image" ]; then
+    # First deployment: no previously stable state exists to restore.
     compose down --remove-orphans || true
     echo "No previous image was available; the failed first deployment was stopped." >&2
   else
+    # Redeploying the same SHA provides no distinct fallback version.
     echo "The failed image was already the active version; no distinct rollback target exists." >&2
   fi
 }
 
-# Rend la nouvelle image active dans la configuration avant son téléchargement et son démarrage.
+# Make the new image active in the configuration before pulling and starting it.
 write_environment_file "$new_image"
 
-# Un échec de téléchargement ne doit jamais remplacer la version précédemment opérationnelle.
+# A pull failure must never replace the previously operational version.
 if ! compose pull; then
   rollback
   exit 1
 fi
 
-# --wait bloque jusqu'à ce que le healthcheck Docker déclare le conteneur sain.
+# --wait blocks until Docker's health check reports that the container is healthy.
 if ! compose up -d --remove-orphans --wait --wait-timeout 120; then
   rollback
   exit 1
 fi
 
-# Vérifie ensuite le chemin public complet : DNS, HTTPS, Traefik puis Nginx.
+# Then verify the full public path: DNS, HTTPS, Traefik, and finally Nginx.
+# Retries span about two minutes, allowing routing and the TLS certificate to
+# become available after the container starts.
 if ! curl --fail --silent --show-error \
   --retry 23 --retry-delay 5 --retry-all-errors \
   --connect-timeout 5 --max-time 10 \
@@ -121,7 +164,10 @@ if ! curl --fail --silent --show-error \
   exit 1
 fi
 
-# Construit un historique sans doublons, du plus récent au plus ancien, limité à trois images.
+# --- Retain deployment images ----------------------------------------------
+
+# Build a deduplicated, newest-first history limited to three images.
+# These entries retain the active image and two rollback candidates.
 temporary_history_file="$history_file.tmp.$$"
 {
   printf '%s\n' "$new_image"
@@ -130,7 +176,7 @@ temporary_history_file="$history_file.tmp.$$"
   fi
 } | awk 'NR <= 3' > "$temporary_history_file"
 
-# Supprime uniquement les anciennes images connues de cet environnement, sans prune global.
+# Remove only old images known to this environment; never run a global prune.
 if [ -f "$history_file" ]; then
   while IFS= read -r old_image; do
     [ -n "$old_image" ] || continue
@@ -142,7 +188,7 @@ if [ -f "$history_file" ]; then
   done < "$history_file"
 fi
 
-# Publie atomiquement le nouvel historique seulement après un déploiement entièrement validé.
+# Atomically publish the new history only after deployment is fully validated.
 mv "$temporary_history_file" "$history_file"
 chmod 600 "$history_file"
 

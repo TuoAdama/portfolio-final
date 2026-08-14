@@ -35,7 +35,8 @@ jobs:
       DEPLOY_ENV: ${{ github.event.action == 'closed' && 'prod' || 'preprod' }}
       DEPLOY_DOMAIN: ${{ github.event.action == 'closed' && 'atuo.fr' || 'preprod.atuo.fr' }}
       DEPLOY_DIRECTORY: ${{ github.event.action == 'closed' && '/root/portfolio/prod' || '/root/portfolio/preprod' }}
-      DEPLOY_SHA: ${{ github.event.action == 'closed' && github.event.pull_request.merge_commit_sha || github.event.pull_request.head.sha }}
+      CHECKOUT_SHA: ${{ github.event.action == 'closed' && github.event.pull_request.merge_commit_sha || github.event.pull_request.head.sha }}
+      IMAGE_SHA: ${{ github.event.pull_request.head.sha }}
       REGISTRY: ghcr.io
       IMAGE_NAME: tuoadama/portfolio-final
 
@@ -43,23 +44,26 @@ jobs:
       - name: Checkout deployed revision
         uses: actions/checkout@v4
         with:
-          ref: ${{ env.DEPLOY_SHA }}
+          ref: ${{ env.CHECKOUT_SHA }}
 
       - name: Set up Node.js
+        if: github.event.action != 'closed'
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
 
       - name: Install dependencies
+        if: github.event.action != 'closed'
         run: npm ci
 
       - name: Run unit tests
+        if: github.event.action != 'closed'
         run: npm test -- --watch=false --browsers=ChromeHeadless
 
       - name: Validate deployment configuration
         env:
-          PORTFOLIO_IMAGE: ghcr.io/tuoadama/portfolio-final:${{ env.DEPLOY_ENV }}-${{ env.DEPLOY_SHA }}
+          PORTFOLIO_IMAGE: ghcr.io/tuoadama/portfolio-final:${{ env.DEPLOY_ENV }}-${{ env.IMAGE_SHA }}
           DOMAIN: ${{ env.DEPLOY_DOMAIN }}
         run: docker compose -f docker-compose.prod.yml config --quiet
 
@@ -74,17 +78,51 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and publish immutable image
+        if: github.event.action != 'closed'
         uses: docker/build-push-action@v6
         with:
           context: .
           file: docker/prod/Dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DEPLOY_ENV }}-${{ env.DEPLOY_SHA }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:preprod-${{ env.IMAGE_SHA }}
           labels: |
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
-            org.opencontainers.image.revision=${{ env.DEPLOY_SHA }}
+            org.opencontainers.image.revision=${{ env.IMAGE_SHA }}
           cache-from: type=gha,scope=portfolio
           cache-to: type=gha,mode=max,scope=portfolio
+
+      - name: Promote preproduction image to production
+        if: github.event.action == 'closed'
+        run: |
+          source_image="$REGISTRY/$IMAGE_NAME:preprod-$IMAGE_SHA"
+          production_image="$REGISTRY/$IMAGE_NAME:prod-$IMAGE_SHA"
+
+          source_digest=""
+          for attempt in $(seq 1 12); do
+            if source_digest=$(docker buildx imagetools inspect "$source_image" --format '{{json .}}' 2>/dev/null | jq -r '.manifest.digest'); then
+              break
+            fi
+            echo "Waiting for $source_image to become available ($attempt/12)..."
+            sleep 10
+          done
+
+          if [ -z "$source_digest" ]; then
+            echo "Preproduction image not found: $source_image" >&2
+            exit 1
+          fi
+
+          docker buildx imagetools create \
+            --prefer-index=false \
+            --tag "$production_image" \
+            "$source_image@$source_digest"
+
+          production_digest=$(docker buildx imagetools inspect "$production_image" --format '{{json .}}' | jq -r '.manifest.digest')
+          if [ "$production_digest" != "$source_digest" ]; then
+            echo "Promotion changed the image digest: $source_digest != $production_digest" >&2
+            exit 1
+          fi
+
+          echo "Promoted $source_image to $production_image with digest $source_digest."
 
       - name: Configure SSH
         env:
@@ -123,7 +161,7 @@ jobs:
           SERVER_PORT: ${{ secrets.SERVER_PORT }}
           SERVER_USER: ${{ secrets.SERVER_USER }}
         run: |
-          image="$REGISTRY/$IMAGE_NAME:$DEPLOY_ENV-$DEPLOY_SHA"
+          image="$REGISTRY/$IMAGE_NAME:$DEPLOY_ENV-$IMAGE_SHA"
           health_url="https://$DEPLOY_DOMAIN/health"
 
           ssh -i "$HOME/.ssh/portfolio_deploy_key" -p "$SERVER_PORT" \
